@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Mi Camino — Kerigma, Confianza y Debilidad</title>
+<style>
+  :root{
+    --ink:#2b241c;
+    --paper:#f4ecdc;
+    --night:#141009;
+    --night-2:#0c0906;
+    --gold:#b9822f;
+    --gold-2:#e0aa5a;
+    --teal:#2c5f66;
+    --teal-2:#4f8f96;
+    --rose:#9c3f3a;
+    --rose-2:#c46a58;
+    --shadow: 0 18px 40px -20px rgba(0,0,0,0.6);
+    --serif: "Iowan Old Style","Palatino Linotype","Book Antiqua",Georgia,serif;
+    --sans: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(1200px 600px at 15% -10%, rgba(224,170,90,0.10), transparent 60%),
+      radial-gradient(900px 500px at 100% 0%, rgba(79,143,150,0.10), transparent 55%),
+      var(--night);
+    color:var(--paper);
+    font-family:var(--sans);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .wrap{max-width:880px;margin:0 auto;padding:48px 20px 90px;}
+
+  /* ---------- Header ---------- */
+  header{text-align:center;margin-bottom:36px;}
+  .eyebrow{
+    font-family:var(--sans);letter-spacing:.22em;text-transform:uppercase;
+    font-size:11px;color:var(--gold-2);margin-bottom:12px;opacity:.85;
+  }
+  h1{
+    font-family:var(--serif);font-weight:400;font-size:clamp(30px,7vw,52px);
+    line-height:1.06;margin:0 0 14px;color:var(--paper);letter-spacing:.2px;
+  }
+  h1 em{
+    font-style:italic;
+    background:linear-gradient(90deg,var(--gold-2),var(--rose-2) 45%,var(--teal-2));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .lede{
+    font-family:var(--serif);font-size:16px;line-height:1.6;
+    color:rgba(244,236,220,0.72);max-width:540px;margin:0 auto;padding:0 6px;
+  }
+
+  .signature{display:flex;justify-content:center;margin:30px 0 6px;}
+  .signature svg{width:170px;height:auto;display:block;}
+  .flicker{animation:flicker 3.6s ease-in-out infinite;}
+  @keyframes flicker{0%,100%{transform:translateY(0) scaleY(1);}50%{transform:translateY(-1.5px) scaleY(1.04);}}
+  @media (prefers-reduced-motion: reduce){ .flicker{animation:none;} }
+
+  /* ---------- Axis cards ---------- */
+  .axes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 40px;}
+  @media (max-width:640px){ .axes{grid-template-columns:1fr;} }
+  .axis-card{
+    background:linear-gradient(180deg, rgba(244,236,220,0.05), rgba(244,236,220,0.02));
+    border:1px solid rgba(244,236,220,0.10);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden;
+  }
+  .axis-card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;}
+  .axis-card.k::before{background:linear-gradient(180deg,var(--gold-2),var(--gold));}
+  .axis-card.c::before{background:linear-gradient(180deg,var(--teal-2),var(--teal));}
+  .axis-card.v::before{background:linear-gradient(180deg,var(--rose-2),var(--rose));}
+  .axis-name{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
+  .dot{width:7px;height:7px;border-radius:50%;display:inline-block;flex-shrink:0;}
+  .k .dot{background:var(--gold-2);} .k .axis-name{color:var(--gold-2);}
+  .c .dot{background:var(--teal-2);} .c .axis-name{color:var(--teal-2);}
+  .v .dot{background:var(--rose-2);} .v .axis-name{color:var(--rose-2);}
+  .axis-card h3{font-family:var(--serif);font-weight:400;font-size:18px;margin:0 0 7px;color:var(--paper);}
+  .axis-card p{font-size:13.5px;line-height:1.5;color:rgba(244,236,220,0.66);margin:0;}
+  .axis-ref{display:block;margin-top:9px;font-family:var(--serif);font-style:italic;font-size:12.5px;color:rgba(244,236,220,0.5);}
+
+  /* ---------- Diario emocional ---------- */
+  .diary-block{
+    background:
+      radial-gradient(600px 300px at 85% -10%, rgba(196,106,88,0.08), transparent 60%),
+      linear-gradient(180deg,#171209,#0c0906);
+    border:1px solid rgba(244,236,220,0.08);
+    border-radius:20px;
+    padding:30px 22px 26px;
+    box-shadow:var(--shadow);
+    margin-bottom:34px;
+  }
+  .diary-title{
+    font-family:var(--serif);font-weight:400;font-size:26px;text-align:center;
+    margin:2px 0 10px;color:var(--paper);
+  }
+  .diary-sub{
+    font-family:var(--serif);font-size:14px;line-height:1.55;text-align:center;
+    color:rgba(244,236,220,0.6);max-width:460px;margin:0 auto 26px;
+  }
+  .wheel-wrap{position:relative;width:min(340px,86vw);margin:0 auto;}
+  .wheel-wrap svg{width:100%;height:auto;display:block;}
+  .wheel-wrap path{cursor:pointer;transition:filter .15s ease, opacity .15s ease;}
+  .wheel-wrap path:hover{filter:brightness(1.18);}
+  .wheel-wrap path.selected{filter:brightness(1.45) saturate(1.3);stroke:#fff8ec;stroke-width:2.5;}
+  .wheel-center{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    text-align:center;pointer-events:none;
+  }
+  .wheel-center span{display:block;font-family:var(--serif);font-size:30px;color:var(--gold-2);font-weight:700;}
+  .wheel-center small{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:rgba(244,236,220,0.55);}
+
+  .selected-chips{
+    display:flex;flex-wrap:wrap;gap:7px;justify-content:center;
+    min-height:14px;margin:20px 0 4px;
+  }
+  .emo-chip{
+    display:flex;align-items:center;gap:6px;
+    font-size:12px;padding:6px 11px 6px 9px;border-radius:999px;color:#fff;
+    font-family:var(--sans);font-weight:600;
+  }
+  .emo-chip button{
+    border:none;background:rgba(255,255,255,0.25);color:#fff;
+    width:15px;height:15px;border-radius:50%;font-size:10px;line-height:1;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;padding:0;
+  }
+
+  .diary-textarea{
+    width:100%;margin-top:18px;
+    background:rgba(244,236,220,0.05);
+    border:1.5px solid rgba(244,236,220,0.14);border-radius:14px;
+    padding:14px 16px;color:var(--paper);font-family:var(--serif);font-size:15px;line-height:1.55;
+    resize:vertical;outline:none;
+  }
+  .diary-textarea:focus{border-color:var(--gold-2);box-shadow:0 0 0 3px rgba(224,170,90,0.16);}
+  .diary-textarea::placeholder{color:rgba(244,236,220,0.34);font-style:italic;}
+
+  .diary-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap;}
+  .diary-date{
+    background:rgba(244,236,220,0.05);border:1.5px solid rgba(244,236,220,0.14);
+    border-radius:10px;padding:10px 12px;color:var(--paper);font-family:var(--sans);font-size:13px;
+    color-scheme:dark;
+  }
+  .diary-save{
+    flex:1;min-width:160px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--rose-2),var(--rose));
+    color:#fff;font-family:var(--sans);font-weight:700;font-size:13.5px;
+    padding:11px 16px;border-radius:10px;
+  }
+  .diary-cancel{
+    border:1.4px solid rgba(244,236,220,0.22);background:transparent;
+    color:rgba(244,236,220,0.75);font-family:var(--sans);font-weight:600;font-size:13px;
+    padding:11px 14px;border-radius:10px;cursor:pointer;
+  }
+  .diary-editing-note{
+    margin:10px 2px 0;font-family:var(--serif);font-style:italic;font-size:12.5px;color:var(--gold-2);
+  }
+
+  .reflections-block{
+    background:
+      radial-gradient(600px 300px at 15% -10%, rgba(79,143,150,0.08), transparent 60%),
+      linear-gradient(180deg,#171209,#0c0906);
+  }
+  .reflections-head{
+    display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;
+  }
+  .reflections-toggle{
+    display:flex;align-items:center;gap:8px;
+    border:1.4px solid rgba(244,236,220,0.18);background:rgba(244,236,220,0.05);
+    color:var(--paper);font-family:var(--sans);font-weight:600;font-size:12.5px;
+    padding:9px 14px;border-radius:999px;cursor:pointer;flex-shrink:0;
+  }
+  .reflections-toggle svg{transition:transform .2s ease;flex-shrink:0;}
+  .reflections-toggle.open svg{transform:rotate(180deg);}
+  .reflections-body{margin-top:20px;}
+  .diary-filter{
+    width:100%;box-sizing:border-box;margin-bottom:16px;
+    background:rgba(244,236,220,0.05);border:1.5px solid rgba(244,236,220,0.14);
+    border-radius:12px;padding:11px 14px;color:var(--paper);font-family:var(--serif);font-size:14px;
+    outline:none;
+  }
+  .diary-filter::placeholder{color:rgba(244,236,220,0.34);font-style:italic;}
+  .diary-filter:focus{border-color:var(--gold-2);box-shadow:0 0 0 3px rgba(224,170,90,0.16);}
+
+  .month-group{margin-bottom:10px;}
+  .month-head{
+    display:flex;justify-content:space-between;align-items:center;
+    background:rgba(244,236,220,0.045);border:1px solid rgba(244,236,220,0.1);
+    border-radius:12px;padding:12px 15px;cursor:pointer;
+  }
+  .month-head span.m-label{font-family:var(--sans);font-weight:700;font-size:13px;color:var(--paper);text-transform:capitalize;}
+  .month-head span.m-count{font-family:var(--sans);font-size:11.5px;color:rgba(244,236,220,0.5);margin-left:8px;}
+  .month-head svg{transition:transform .2s ease;color:rgba(244,236,220,0.5);flex-shrink:0;}
+  .month-head.open svg{transform:rotate(180deg);}
+  .month-entries{
+    display:flex;flex-direction:column;gap:10px;
+    margin:10px 0 4px;padding-left:4px;
+  }
+  .diary-entry-actions{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+  .diary-entry-edit{
+    border:none;background:transparent;color:rgba(244,236,220,0.4);
+    cursor:pointer;font-size:13px;padding:2px 4px;
+  }
+  .diary-entry-edit:hover{color:var(--gold-2);}
+
+  .diary-export-row{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;}
+  .diary-export{
+    flex:1;min-width:170px;border:1.4px dashed rgba(244,236,220,0.25);
+    background:rgba(244,236,220,0.04);color:rgba(244,236,220,0.85);
+    font-family:var(--sans);font-weight:600;font-size:12.5px;
+    padding:10px 12px;border-radius:10px;cursor:pointer;
+  }
+  .diary-export:hover{background:rgba(244,236,220,0.08);}
+  .diary-note{
+    text-align:center;font-family:var(--serif);font-style:italic;font-size:12px;
+    color:rgba(244,236,220,0.4);margin:10px 0 0;min-height:14px;
+  }
+
+  .diary-timeline{margin-top:24px;display:flex;flex-direction:column;gap:12px;}
+  .diary-entry{
+    background:rgba(244,236,220,0.04);border:1px solid rgba(244,236,220,0.09);
+    border-radius:14px;padding:15px 17px;
+  }
+  .diary-entry-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;gap:10px;}
+  .diary-entry-date{font-family:var(--sans);font-size:12px;font-weight:700;color:var(--gold-2);letter-spacing:.02em;}
+  .diary-entry-del{
+    border:none;background:transparent;color:rgba(244,236,220,0.35);
+    cursor:pointer;font-size:13px;padding:2px 4px;
+  }
+  .diary-entry-del:hover{color:var(--rose-2);}
+  .diary-entry-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:9px;}
+  .diary-entry-chip{
+    font-size:10px;padding:3px 9px;border-radius:999px;color:#fff;font-family:var(--sans);font-weight:600;
+  }
+  .diary-entry-text{font-family:var(--serif);font-size:14.5px;line-height:1.55;color:rgba(244,236,220,0.88);}
+  .diary-empty{
+    text-align:center;font-family:var(--serif);font-style:italic;font-size:13.5px;
+    color:rgba(244,236,220,0.35);padding:10px 0;
+  }
+
+  @media (max-width:600px){
+    .diary-block{padding:22px 15px 20px;border-radius:16px;}
+    .diary-title{font-size:22px;}
+    .diary-sub{font-size:13.5px;}
+    .wheel-center span{font-size:24px;}
+  }
+
+  /* ---------- Search block (negro) ---------- */
+  .search-block{
+    background:
+      radial-gradient(700px 320px at 15% -25%, rgba(224,170,90,0.08), transparent 60%),
+      linear-gradient(180deg,#171209,#050403);
+    color:var(--paper);
+    border-radius:20px;
+    padding:26px 20px 22px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(244,236,220,0.08);
+  }
+  .search-title{
+    font-family:var(--serif);font-size:14px;text-align:center;
+    color:rgba(244,236,220,0.55);margin:0 0 15px;font-style:italic;line-height:1.5;
+  }
+  .search-row{
+    display:flex;align-items:center;gap:8px;
+    background:rgba(244,236,220,0.05);
+    border:1.5px solid rgba(244,236,220,0.16);
+    border-radius:14px;padding:5px 6px 5px 15px;
+  }
+  .search-row:focus-within{border-color:var(--gold-2);box-shadow:0 0 0 3px rgba(224,170,90,0.16);}
+  .search-row svg{flex:0 0 auto;opacity:.5;}
+  #q{
+    flex:1;min-width:0;border:none;outline:none;font-family:var(--serif);
+    font-size:16px;padding:12px 4px;background:transparent;color:var(--paper);
+  }
+  #q::placeholder{color:rgba(244,236,220,0.34);font-style:italic;}
+  #clearBtn{
+    border:none;background:rgba(244,236,220,0.10);color:rgba(244,236,220,0.7);
+    width:30px;height:30px;border-radius:50%;cursor:pointer;font-size:15px;flex-shrink:0;
+    display:none;align-items:center;justify-content:center;
+  }
+  #clearBtn.show{display:flex;}
+  #goBtn{
+    border:none;flex-shrink:0;cursor:pointer;
+    background:linear-gradient(135deg,var(--gold-2),var(--gold));
+    color:#241a08;font-family:var(--sans);font-weight:700;font-size:13px;
+    padding:11px 16px;border-radius:10px;
+    display:flex;align-items:center;gap:6px;
+  }
+
+  #cateBtn{
+    width:100%;margin-top:14px;
+    border:1.5px dashed rgba(224,170,90,0.4);
+    background:rgba(224,170,90,0.06);
+    color:var(--gold-2);
+    font-family:var(--sans);font-weight:700;font-size:13px;
+    padding:12px 14px;border-radius:12px;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    transition:background .15s ease;
+  }
+  #cateBtn:hover{background:rgba(224,170,90,0.12);}
+  #cateBtn svg{flex-shrink:0;}
+
+  /* ---------- Modal Catequesis ---------- */
+  .cate-overlay{
+    position:fixed;inset:0;background:rgba(8,6,3,0.72);
+    display:none;align-items:flex-start;justify-content:center;
+    padding:26px 14px;z-index:100;overflow-y:auto;
+    backdrop-filter:blur(2px);
+  }
+  .cate-overlay.open{display:flex;}
+  .cate-sheet{
+    background:#fbf6ea;color:#241d12;
+    max-width:660px;width:100%;border-radius:16px;
+    padding:34px 30px 40px;position:relative;
+    box-shadow:0 30px 70px -20px rgba(0,0,0,0.6);
+    animation:rise .3s ease both;
+  }
+  .cate-close{
+    position:absolute;top:14px;right:14px;
+    width:32px;height:32px;border-radius:50%;border:none;
+    background:rgba(36,29,18,0.08);color:#241d12;font-size:17px;cursor:pointer;
+  }
+  .cate-print{
+    position:sticky;top:0;margin:0 0 18px auto;display:block;
+    border:none;background:linear-gradient(135deg,var(--gold-2),var(--gold));
+    color:#241a08;font-family:var(--sans);font-weight:700;font-size:12.5px;
+    padding:9px 16px;border-radius:9px;cursor:pointer;
+  }
+  .cate-doc h2{
+    font-family:var(--serif);font-weight:400;font-size:26px;margin:0 0 4px;color:#241d12;
+  }
+  .cate-doc .cate-sub{
+    font-family:var(--sans);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    color:#8a6a2f;margin-bottom:22px;
+  }
+  .cate-doc h3{
+    font-family:var(--sans);font-size:12px;letter-spacing:.1em;text-transform:uppercase;
+    color:#8a6a2f;margin:26px 0 10px;border-bottom:1px solid rgba(138,106,47,0.25);padding-bottom:6px;
+  }
+  .cate-doc p{
+    font-family:var(--serif);font-size:15.5px;line-height:1.75;margin:0 0 13px;color:#2c2416;
+  }
+  .cate-doc .cate-verse{
+    font-style:italic;padding-left:14px;border-left:3px solid #d9b06a;margin:0 0 13px;color:#3a2f1c;
+  }
+  .cate-doc .cate-ref{
+    display:block;font-style:normal;font-family:var(--sans);font-size:11px;font-weight:700;
+    color:#8a6a2f;margin-top:3px;letter-spacing:.03em;
+  }
+  .cate-doc .cate-kerigma{
+    background:rgba(224,170,90,0.16);border-radius:10px;padding:14px 16px;margin:0 0 13px;
+    font-style:italic;
+  }
+  .cate-doc .cate-closing{
+    margin-top:26px;padding-top:18px;border-top:1px solid rgba(138,106,47,0.25);
+    font-family:var(--serif);font-style:italic;text-align:center;color:#5a4a2c;
+  }
+
+  @media print{
+    body *{visibility:hidden;}
+    .cate-sheet, .cate-sheet *{visibility:visible;}
+    .cate-sheet{position:absolute;left:0;top:0;width:100%;max-width:100%;box-shadow:none;padding:10mm 14mm;}
+    .cate-close, .cate-print{display:none;}
+    .cate-doc h3{page-break-before:auto;}
+  }
+
+  .chips{display:flex;gap:7px;flex-wrap:wrap;justify-content:center;margin:15px 0 2px;}
+  .chip{
+    font-size:12px;padding:7px 13px;border-radius:999px;
+    border:1.4px solid rgba(244,236,220,0.18);background:transparent;
+    color:rgba(244,236,220,0.62);cursor:pointer;display:flex;align-items:center;gap:6px;
+    transition:all .15s ease;
+  }
+  .chip .dot{width:6px;height:6px;}
+  .chip[data-active="true"]{color:#fff;border-color:transparent;}
+  .chip[data-axis="kerigma"][data-active="true"]{background:linear-gradient(135deg,var(--gold-2),var(--gold));}
+  .chip[data-axis="confianza"][data-active="true"]{background:linear-gradient(135deg,var(--teal-2),var(--teal));}
+  .chip[data-axis="vulnerabilidad"][data-active="true"]{background:linear-gradient(135deg,var(--rose-2),var(--rose));}
+  .chip[data-active="true"] .dot{background:#fff;}
+
+  .meta-row{
+    display:flex;justify-content:center;align-items:center;
+    margin:16px 2px 0;font-size:11.5px;color:rgba(244,236,220,0.4);text-align:center;
+  }
+
+  /* ---------- Result sections ---------- */
+  #results{margin-top:20px;display:flex;flex-direction:column;gap:22px;}
+  .section-label{
+    display:flex;align-items:center;gap:9px;margin-bottom:11px;padding-left:2px;
+  }
+  .section-label .ico{width:15px;height:15px;flex-shrink:0;opacity:.85;}
+  .section-label span{
+    font-family:var(--sans);font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-weight:700;
+  }
+  .section-label.kerigma span{color:var(--gold-2);}
+  .section-label.bible span{color:var(--teal-2);}
+  .section-label.mine span{color:var(--rose-2);}
+
+  .kerigma-box{
+    background:linear-gradient(135deg, rgba(224,170,90,0.14), rgba(224,170,90,0.04));
+    border:1px solid rgba(224,170,90,0.28);
+    border-radius:14px;padding:16px 18px;margin-bottom:10px;
+  }
+  .kerigma-box:last-child{margin-bottom:0;}
+  .kerigma-box p{
+    margin:0;font-family:var(--serif);font-style:italic;font-size:16px;line-height:1.6;color:#fff3dc;
+  }
+
+  .bible-card{
+    background:rgba(79,143,150,0.09);
+    border:1px solid rgba(79,143,150,0.28);
+    border-radius:14px;padding:16px 18px;margin-bottom:10px;
+  }
+  .bible-card:last-child{margin-bottom:0;}
+  .bible-ref{
+    font-family:var(--sans);font-size:11px;font-weight:700;letter-spacing:.05em;
+    color:var(--teal-2);margin-bottom:6px;text-transform:uppercase;
+  }
+  .bible-text{
+    font-family:var(--serif);font-size:15.5px;line-height:1.62;color:rgba(244,236,220,0.94);font-style:italic;
+  }
+
+  .card{
+    background:rgba(244,236,220,0.045);
+    border:1px solid rgba(244,236,220,0.10);
+    border-radius:14px;padding:15px 18px;margin-bottom:10px;
+    animation:rise .35s ease both;
+  }
+  .card:last-child{margin-bottom:0;}
+  @keyframes rise{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+  .card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:8px;flex-wrap:wrap;}
+  .card-source{font-size:11px;font-weight:600;color:rgba(244,236,220,0.5);}
+  .badges{display:flex;gap:5px;flex-shrink:0;flex-wrap:wrap;}
+  .badge{
+    font-size:9px;letter-spacing:.07em;text-transform:uppercase;padding:3px 7px;
+    border-radius:6px;color:#fff;font-weight:600;
+  }
+  .badge.kerigma{background:var(--gold);}
+  .badge.confianza{background:var(--teal);}
+  .badge.vulnerabilidad{background:var(--rose);}
+  .card-text{font-family:var(--serif);font-size:15.5px;line-height:1.6;color:rgba(244,236,220,0.92);}
+  .card-text mark{background:rgba(224,170,90,0.35);color:#fff8ec;border-radius:3px;padding:0 2px;}
+
+  .empty-mine{
+    font-family:var(--serif);font-style:italic;font-size:14px;
+    color:rgba(244,236,220,0.4);padding:6px 2px;
+  }
+  .hint{text-align:center;padding:34px 10px 6px;color:rgba(244,236,220,0.35);font-family:var(--serif);font-style:italic;font-size:14px;}
+
+  footer{text-align:center;margin-top:50px;font-family:var(--serif);font-style:italic;font-size:12.5px;color:rgba(244,236,220,0.32);}
+
+  /* ---------- Móvil ---------- */
+  @media (max-width:600px){
+    .wrap{padding:30px 14px 56px;}
+    header{margin-bottom:26px;}
+    .lede{font-size:14.5px;}
+    .signature{margin:22px 0 2px;}
+    .signature svg{width:130px;}
+    .axes{gap:9px;margin:22px 0 26px;}
+    .axis-card{padding:14px 13px;}
+    .axis-card h3{font-size:16px;}
+    .axis-card p{font-size:13px;}
+    .search-block{padding:18px 12px 14px;border-radius:16px;}
+    .search-row{flex-wrap:nowrap;padding:4px 5px 4px 11px;border-radius:12px;}
+    #q{font-size:16px;padding:11px 2px;}
+    #goBtn span.label{display:none;}
+    #goBtn{padding:11px 13px;}
+    .chips{gap:6px;}
+    .chip{padding:6px 11px;font-size:11.5px;}
+    .kerigma-box{padding:14px 15px;}
+    .kerigma-box p{font-size:15px;}
+    .bible-card,.card{padding:13px 14px;}
+    .bible-text,.card-text{font-size:14.5px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Un archivo personal de fe</div>
+    <h1>Mi <em>Camino</em></h1>
+    <p class="lede">Kerigma, Confianza y Debilidad convertida en fuerza — tres hilos de una misma historia, la mía, sostenida por el amor que Dios me tiene manifestado en Jesús.</p>
+  </header>
+
+  <div class="signature">
+    <svg viewBox="0 0 220 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 118 C 50 90, 40 60, 70 40 C 90 27, 95 15, 100 5" stroke="#e0aa5a" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.85"/>
+      <path d="M110 120 C 108 90, 118 70, 105 45 C 98 30, 100 15, 100 5" stroke="#4f8f96" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.85"/>
+      <path d="M200 118 C 170 92, 178 62, 130 38 C 112 28, 104 15, 100 5" stroke="#c46a58" stroke-width="2.4" stroke-linecap="round" fill="none" opacity="0.85"/>
+      <ellipse class="flicker" cx="100" cy="10" rx="6" ry="11" fill="url(#flame)"/>
+      <defs>
+        <radialGradient id="flame" cx="50%" cy="70%" r="65%">
+          <stop offset="0%" stop-color="#fff3d6"/><stop offset="55%" stop-color="#e0aa5a"/><stop offset="100%" stop-color="#b9822f"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <section class="axes">
+    <div class="axis-card k">
+      <div class="axis-name"><span class="dot"></span>Eje 1 · Kerigma</div>
+      <h3>El amor que Dios me tiene</h3>
+      <p>El amor de Jesús que me sostiene aunque haya pasado por circunstancias muy dolorosas. Manifestado en Cristo, ahora, sin condición.</p>
+      <span class="axis-ref">La buena noticia · el Kerigma</span>
+    </div>
+    <div class="axis-card c">
+      <div class="axis-name"><span class="dot"></span>Eje 2 · Confianza</div>
+      <h3>Apoyado en el Evangelio</h3>
+      <p>No os afanéis por el mañana; mirad las aves del cielo. Una confianza que se aprende poco a poco, no de golpe.</p>
+      <span class="axis-ref">Mateo 6, 24-34</span>
+    </div>
+    <div class="axis-card v">
+      <div class="axis-name"><span class="dot"></span>Eje 3 · Vulnerabilidad</div>
+      <h3>Cuando soy débil, soy fuerte</h3>
+      <p>Mi debilidad como lugar donde se manifiesta la fuerza del Señor. No una debilidad negada, sino habitada por gracia.</p>
+      <span class="axis-ref">2 Corintios 12, 9-10</span>
+    </div>
+  </section>
+
+  <section class="diary-block">
+    <div class="eyebrow" style="text-align:center;">Espacio para expresar</div>
+    <h2 class="diary-title">¿Cómo te encuentras hoy?</h2>
+    <p class="diary-sub">Toca las emociones que sientes ahora mismo y, si quieres, cuéntalo con tus palabras. Queda guardado por fecha — este apartado es solo tuyo, el buscador de arriba no lo toca.</p>
+
+    <div class="wheel-wrap">
+      <svg id="emotionWheel" viewBox="0 0 400 400"></svg>
+      <div class="wheel-center">
+        <span id="wheelCount">0</span>
+        <small>seleccionadas</small>
+      </div>
+    </div>
+
+    <div class="selected-chips" id="selectedChips"></div>
+
+    <textarea id="diaryText" class="diary-textarea" placeholder="Cómo lo estás viviendo, con tus propias palabras…" rows="4"></textarea>
+
+    <div class="diary-actions">
+      <input type="date" id="diaryDate" class="diary-date">
+      <button id="saveDiaryBtn" class="diary-save">Guardar en el diario</button>
+      <button id="cancelEditBtn" class="diary-cancel" style="display:none;">Cancelar edición</button>
+    </div>
+    <p class="diary-editing-note" id="editingNote" style="display:none;">✎ Editando una entrada anterior…</p>
+
+    <div class="diary-export-row">
+      <button id="exportJsonBtn" class="diary-export">⬇ Exportar diario (.json)</button>
+      <button id="exportWordBtn" class="diary-export">⬇ Exportar diario (Word)</button>
+      <button id="refreshGithubBtn" class="diary-export">🔄 Actualizar desde GitHub</button>
+    </div>
+    <p class="diary-note" id="diaryLoadNote"></p>
+  </section>
+
+  <section class="diary-block reflections-block">
+    <div class="reflections-head">
+      <div>
+        <div class="eyebrow" style="text-align:left;margin-bottom:6px;">Lo que ya has ido guardando</div>
+        <h2 class="diary-title" style="text-align:left;margin:0;">Reflexiones diario</h2>
+      </div>
+      <button id="toggleReflections" class="reflections-toggle">
+        <span id="reflectionsCountLabel">0 entradas</span>
+        <svg id="reflectionsChevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+
+    <div id="reflectionsBody" class="reflections-body" style="display:none;">
+      <input type="text" id="diaryFilter" class="diary-filter" placeholder="Buscar en tus reflexiones… (palabra, emoción)">
+      <div class="diary-timeline" id="diaryTimeline"></div>
+    </div>
+  </section>
+
+  <section class="search-block">
+    <p class="search-title">Escribe una palabra o una frase.<br>Primero el Kerigma —lo que nunca cambia—, luego la Palabra, luego tu historia.</p>
+    <div class="search-row">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input id="q" type="text" placeholder="p. ej. confianza, miedo, abuso, perdón, Yolanda…" autocomplete="off">
+      <button id="clearBtn" aria-label="Borrar">×</button>
+      <button id="goBtn"><span class="label">Buscar</span>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+    <div class="chips">
+      <button class="chip" data-axis="kerigma" data-active="false"><span class="dot" style="background:var(--gold)"></span>Kerigma</button>
+      <button class="chip" data-axis="confianza" data-active="false"><span class="dot" style="background:var(--teal)"></span>Confianza</button>
+      <button class="chip" data-axis="vulnerabilidad" data-active="false"><span class="dot" style="background:var(--rose)"></span>Vulnerabilidad</button>
+    </div>
+    <div class="meta-row" id="metaRow">125 párrafos · 37 pasajes de la Palabra</div>
+    <button id="cateBtn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Generar catequesis de esta palabra (2 páginas)
+    </button>
+    <div id="results"></div>
+  </section>
+
+  <footer>«La muerte no tiene la última palabra.»</footer>
+</div>
+
+<div class="cate-overlay" id="cateOverlay">
+  <div class="cate-sheet">
+    <button class="cate-close" id="cateClose" aria-label="Cerrar">×</button>
+    <button class="cate-print" id="catePrint">Imprimir / Guardar como PDF</button>
+    <div class="cate-doc" id="cateDoc"></div>
+  </div>
+</div>
+
+<script>
+const PAYLOAD = {"reflections": [{"id": "56dc050605", "source": "Mi testimonio", "axis": ["vulnerabilidad"], "text": "Crecí en una familia disfuncional, debido a la compleja situación entre los diferentes miembros de mi familia. Mi padre, con problemas de identidad de género; mi abuela, la madre de mi padre, ejerció sobreprotección y control como defensa. Por parte de mi madre, tuvo una infancia difícil, huérfana de padre, ingresada en un colegio-orfanato que le produjo profundas heridas emocionales."}, {"id": "c8898c05a6", "source": "Mi testimonio", "axis": ["vulnerabilidad"], "text": "Vivimos maltrato, abuso, abandono, miedo, incertidumbre, y sobre todo la indiferencia, no ser nada ni nadie. Por parte de mi madre, tristeza, oscuridad, llanto, pena, sumisión. Esperaba de ella no una defensa pero sí una mirada, calor, nombre. «Me dolió tanto la vida», pero pude sobrevivir a rastras, pasé por este abuso."}, {"id": "b6accd005f", "source": "Mi testimonio", "axis": ["kerigma", "vulnerabilidad"], "text": "Conocí a un catequista de la parroquia de mi barrio mientras jugaba en el parque. Esto me llevó a unirme a un grupo de adolescentes, lo que tuvo un impacto positivo, nuevas amistades, mejoró mi vida y el sentimiento de seguridad y pertenencia. Encontré un sitio seguro."}, {"id": "a10f764d5a", "source": "Mi testimonio", "axis": ["vulnerabilidad"], "text": "Cuando empezamos a preparar los sitios donde íbamos a dormir, el responsable del grupo me dijo que durmiera a su lado y esto me incomodó, no estaba familiarizado con la confianza, no dije nada. Fui abusado, robado, me quitaron lo poquito que me quedaba, mi intimidad y dignidad. ¡Mis primeros ejercicios espirituales!"}, {"id": "cff3692e12", "source": "Mi testimonio", "axis": ["vulnerabilidad"], "text": "Sentí como robaba algo íntimo, personal, algo que era mío. Empecé a temblar, la repulsión que sentí no puedo expresarla, con la mirada fija en el techo, congelado, petrificado, dejé de sentir. En oleadas llegaba la sensación de abandono, miedo, culpa, el infierno."}, {"id": "49208d8cfd", "source": "Mi testimonio", "axis": ["confianza", "vulnerabilidad"], "text": "Venía de un hogar donde mi padre no me quería y mi madre sí me quería pero nunca me lo dijo. Había encontrado un sitio seguro y ahora esto. Si Juan, fundador, portador de mi confianza y nueva vida, persona influyente inalcanzable, él no puede estar equivocado, ¡¡SOY YO!! Ha sido un mantra en mi vida."}, {"id": "c08b618d07", "source": "Mi testimonio", "axis": ["vulnerabilidad"], "text": "El hecho de no poder seguir en el grupo me aterraba, allí había encontrado seguridad, así que me entregué y me sometí, era como pagar un peaje por estar en ese sitio; reiteradamente durante los siguientes 5 años abusó de mí. La primera vez me robó mi dignidad e intimidad, las siguientes veces me domesticó, y con el tiempo me acostumbré."}, {"id": "4d61866590", "source": "Mi testimonio", "axis": ["confianza", "kerigma"], "text": "Mi relación con Yolanda siguió, es mi mujer y tenemos 3 hijos, son una maravilla. Yolanda ha sido un sostén, un andamiaje que me ha sostenido en mi proceso, como los edificios rehabilitados en el centro histórico de Málaga: se rehacen pilares manteniendo la integridad y la historia del edificio, aunque por dentro haya una nueva estructura."}, {"id": "adcc11daf4", "source": "Mi testimonio", "axis": ["kerigma", "confianza"], "text": "En quien confiar, y sobre todo cómo camino en mi Fe, ya sé que son personas y que Dios no tiene nada que ver con esto, pero cómo digerirlo, cómo destilarlo para que no me haga daño. Cómo escuchar palabras de vida en una persona que ha atentado contra la mía."}, {"id": "37b3e6e815", "source": "Mi testimonio", "axis": ["kerigma", "confianza"], "text": "La muerte no tiene la última palabra. Mi fe me sostiene y aunque aún siento temor, sé que no me derribará. Quiero compartir mi testimonio porque sé que esta experiencia tan difícil no es solo para mí; deseo estar disponible para ayudar a otros. Esto es lo que me motiva a escribir."}, {"id": "b940244876", "source": "Mi testimonio", "axis": ["vulnerabilidad", "kerigma"], "text": "He presentado mi caso ante la comisión de víctimas en el obispado de Málaga, he formado parte de la familia Ruaj, completé el seminario de acompañamiento y estoy involucrado en la asociación Redime, donde participo en grupos de ayuda."}, {"id": "bf9033296e", "source": "Superviviente", "axis": ["vulnerabilidad"], "text": "Durante mucho tiempo he sentido una reserva interna, una reticencia a abrirme, debido a la presencia constante de culpa y vergüenza en mi vida. Temía que al revelar mi verdad no sería aceptado, reviviendo el miedo al abandono que experimenté en el pasado. Me he resistido a aceptar mi vulnerabilidad y debilidad, sin asumir completamente mi propia historia. Hoy deseo romper ese ciclo y expresar abiertamente quién soy."}, {"id": "d6aa6dda7f", "source": "Superviviente", "axis": ["kerigma"], "text": "Mi capacidad para hablar y expresarme se debe, en gran medida, a la compañía constante del Señor. A lo largo de mi doloroso viaje, Él ha estado a mi lado, esperando, soportándome y brindándome apoyo a través de diversas personas, situaciones de vida y mediaciones que han sido fundamentales para que hoy pueda compartir mi historia."}, {"id": "f7e6ee5e27", "source": "Superviviente", "axis": ["confianza", "kerigma"], "text": "El Señor no puede anular nuestra libertad, el regalo más precioso que nos ha dado por amor, ya que respeta siempre nuestra capacidad de elegir. No obstante, está siempre con nosotros, acompañándonos y dando nuevo significado a lo que experimentamos. La acción del Señor no siempre se manifiesta de manera espectacular: Él nos acompaña, fortalece, y se convierte en nuestro camino en medio de lo que nos sucede."}, {"id": "2de9fc8f30", "source": "Superviviente", "axis": ["kerigma", "confianza"], "text": "Este acompañamiento ha sido vital, mediante palabras que han llegado a mi vida como flotadores en medio del océano, regalos interiores llenos de vida, momentos de silencio llenos de contenidos. Puedo asegurar que él siempre estuvo, que nos tiene sujetos con su mano derecha, pero eso no significa que no tengamos que atravesar este valle de sombras."}, {"id": "c1b0bf3680", "source": "Superviviente", "axis": ["vulnerabilidad"], "text": "Recuerdo mi infancia con soledad, con una terrible indiferencia, con un sentido de no pertenecer, de no contar, de no existir. La necesidad básica de la ternura y el amor estuvieron ausentes en mi vida. ¡Cuánto me dolía la vida!"}, {"id": "f3c8d47baa", "source": "Superviviente", "axis": ["kerigma", "vulnerabilidad"], "text": "Este responsable era adulto, dedicado plenamente al grupo de jóvenes, denominado como célibe. Me dijo que durmiera a su lado y esto me incomodó, no estaba familiarizado con la confianza. Fui abusado, robado, me quitaron lo poquito que me quedaba, mi intimidad y dignidad."}, {"id": "9849cfa039", "source": "Superviviente", "axis": ["confianza", "kerigma"], "text": "En casa, la disciplina militar de mi padre persistía, pero Dios, de alguna manera, aprovechó esas circunstancias para moldear mi voluntad y fortalecer mis manos, a pesar de mi desconocimiento."}, {"id": "d2331fe4de", "source": "Superviviente", "axis": ["confianza", "kerigma"], "text": "Yolanda se convirtió en el pilar de apoyo que sostuvo mi proceso de sanación, comparable al andamiaje que se coloca en la rehabilitación de edificios históricos. El Señor seguía respetando la libertad de todo individuo de mi alrededor pero acompañándome y proveyendo en momentos importantes."}, {"id": "a4b62b3d02", "source": "Superviviente", "axis": ["vulnerabilidad", "confianza"], "text": "Yolanda tenía útero septo; cada embarazo fue muy complicado, el más difícil fue María, nació con 1200 gramos, incubadora, incertidumbre de cómo quedaría mi niña. En cada experiencia de cada hijo, el Señor me regaló: con Carlos su presencia, oración; con María el silencio; y con Pedro la confianza."}, {"id": "e4b5324701", "source": "Superviviente", "axis": ["confianza"], "text": "Tenía dos textos bíblicos que llevaba en mi mochila, eran dos regalos del Señor que años antes me había regalado: Mateo 6, 24-34, y 2 Corintios 12. Le pedí al Señor que me diera una prueba para saber que estaba a mi lado: el día del bautizo de Pedro coincidieron esas dos lecturas en la celebración. Creo que es más fácil que toque la lotería. Fue un milagro."}, {"id": "0ca923b11c", "source": "Superviviente", "axis": ["vulnerabilidad"], "text": "Llegó el covid y todas las defensas que yo tenía las rompió: neumonía bilateral, ingreso en el hospital. Tuve una experiencia con el Señor de ahogo, pude entender la asfixia del Señor; esa experiencia no fue buscada, me llegó al corazón sin buscarla."}, {"id": "2ab011a228", "source": "Superviviente", "axis": ["vulnerabilidad"], "text": "Me sentía con una vulnerabilidad extrema, entraban en mi habitación como astronautas por el miedo al contagio. Aquello rompió las defensas que yo había construido, saltaron, se resquebrajaron. Totalmente vulnerable y desprovisto de cualquier defensa psicológica entré en un trastorno de ansiedad."}, {"id": "62ae485e3f", "source": "Superviviente", "axis": ["vulnerabilidad", "kerigma"], "text": "Ruaj me becó, así que el 80% del coste de la terapia lo asumieron; junto con Ana empecé a procesar y a destilar parte de mi vida. Así llegué a Redime, una asociación de ayuda a personas abusadas; allí he encontrado personas maravillosas heridas como yo."}, {"id": "f8fabce702", "source": "Superviviente", "axis": ["kerigma", "vulnerabilidad"], "text": "El Señor no puede evitar el mal en el mundo, pero soy testigo de una cosa: Dios te acompaña, pero además con tus debilidades hace vida. Por eso quiero contar mis vulnerabilidades, porque el Señor solo desde ahí hará mi vida. Juan Carlos de verdad es muy débil y vulnerable, esa es la verdad, pero sobreviviente, mirando al Señor."}, {"id": "df389e61dc", "source": "Superviviente", "axis": ["kerigma"], "text": "Quiero dedicar mi vida a ser instrumento y mediación del Señor, lo mismo que yo he experimentado, y así poder expresar aquí y ahora que la muerte no tiene la última palabra, que el Señor está, que el Señor me ama, que no me ha dejado y que soy testigo de un Dios que provee ante las dificultades."}, {"id": "4cd10ed396", "source": "Superviviente", "axis": ["kerigma"], "text": "«Desde el vientre materno te elegí», eres precioso ante mis ojos, tú eres mi hijo amado."}, {"id": "b3903c768f", "source": "Carta a mi obispo", "axis": ["kerigma", "confianza"], "text": "Mi nombre es Juan Carlos, estoy casado, tengo 3 hijos, 58 años. Me considero hijo de la Iglesia, porque es ella —por medio de la fe— la que da sentido a mi vida; y es precisamente por esa fe que me atrevo hoy a escribirle. Quisiera compartir con usted una parte de mi vida para expresar mi fe y también mis heridas."}, {"id": "10c9ec7088", "source": "Carta a mi obispo", "axis": ["vulnerabilidad"], "text": "Nací en una familia creyente, aunque marcada por profundas heridas. Mi padre, con una crisis de identidad sexual, nunca logró asentarse plenamente; su dolor le hacía distante, y un niño interpretaba esa distancia como rechazo: “éramos estorbos, no éramos dignos”, pensaba yo. Crecí con disciplina, tristeza y falta de cariño; me repetían que no valía."}, {"id": "d9e0e135b1", "source": "Carta a mi obispo", "axis": ["kerigma", "vulnerabilidad"], "text": "Con la presencia del Señor, encontré un grupo de jóvenes en la Iglesia: allí sentí que podía expresarme, me abrí a la música, canté en el coro, tocaba la guitarra, mis estudios mejoraron... allí vivía. Pero un día, durante unos ejercicios espirituales, sufrí un abuso por parte del responsable del grupo. Fue un golpe tremendo: me robaron lo poco de dignidad que tenía."}, {"id": "69f4502511", "source": "Carta a mi obispo", "axis": ["confianza", "kerigma"], "text": "Pasaron 18 años sin pertenecer a ninguna comunidad, aunque nunca me alejé del Señor. Siempre volvía a la capilla de mi barrio, al sagrario; allí encontraba paz en medio del infierno que sentía. Me casé, tengo tres hijos —una bendición— y, gracias a Dios, entramos juntos en una comunidad parroquial y compartimos la Fe."}, {"id": "cb8e447d58", "source": "Carta a mi obispo", "axis": ["kerigma", "confianza"], "text": "Aun así, el Señor sigue conmigo. En estas fechas —cuando “cuánto frío hace en Belén”—, siento que Él permanece conmigo en mi debilidad, como en el pesebre. La Iglesia es mi otra madre: por eso acudo a usted, pidiendo unas palabras de aliento, un gesto de comprensión, consuelo y esperanza."}, {"id": "d83ebfa5b3", "source": "Carta a mi obispo", "axis": ["kerigma"], "text": "Mis palabras, como verá, no son de rechazo ni de petición de justicia; siento mucho dolor, las sombras y el frío están en mi vida, pero hoy rezo por mi abusador, rezo por la persona; los hechos están en la cruz de nuestro Señor."}, {"id": "1bce7b62f8", "source": "La gran mentira (identidad)", "axis": ["vulnerabilidad"], "text": "La gran mentira. Esa fue nuestra realidad en la calle Alazores. No éramos un deseo, ni un proyecto. Fuimos una tarea, una conveniencia, no una ilusión. Fuimos un parche ante una falla, un capricho, un “quizás”. No importaba lo que fuéramos, porque teníamos algo que ocultar."}, {"id": "b916250ded", "source": "La gran mentira (identidad)", "axis": ["kerigma"], "text": "Acepto esta verdad: solo fui llamado por Dios, solo fui amado libremente, sin ser causa de algo, sin ser carga. Solo Dios me deseó, solo Él me quiso. Él es mi Padre y Madre, Él es mi razón de ser. Yo soy la verdad de mi Dios, la lección y la libertad que brota del amor."}, {"id": "45520a3674", "source": "La gran mentira (identidad)", "axis": ["kerigma"], "text": "Fui un deseo, un motivo, una pregunta: ¿ me amas ?. Fui hijo, ilusión y proyecto, fui una tarea cariñosa, esperado y querido, anhelado y sentido. Fui motivo de lágrimas y desesperación, pero también de alegría y esperanza. Fui el fruto de la espera, el regalo. Soy hijo de Dios, hermano amado de Jesús, deseo, acción y afecto del Espíritu."}, {"id": "99ef87e702", "source": "La gran mentira (identidad)", "axis": ["vulnerabilidad"], "text": "Necesitaba salir de allí, me quemaba por dentro. Sentí coraje, desprecio, la amarga sensación de ser hijo no deseado. Sentía rechazo, una frustración que se manifestaba en mi identidad. Así viví, buscando siempre un hogar, un respiro, un gesto de cariño y aceptación, buscando el calor de un hogar."}, {"id": "3a7b3b040d", "source": "La gran mentira (identidad)", "axis": ["vulnerabilidad"], "text": "Salí al camino, buscando, llamando, pero una vez más fui seducido, engañado. En el camino fui despojado, seducido y robado. Me quitaron lo que apenas comenzaba a crecer: mi dignidad, mi valor, mi nombre. Quedé vacío, reducido a una envoltura, despreciado, ultrajado, utilizado."}, {"id": "56f7b7722e", "source": "La gran mentira (identidad)", "axis": ["kerigma", "vulnerabilidad"], "text": "Y aún así, seguí siendo motivo de lágrimas, de compañía y compasión, de esperanza para un Dios que, ante mi despojo y ultraje, descendió y se encarnó. Ante mi vacío, se hizo plenitud. Ante mi desprecio, se convirtió en deseo y motivo de redención. La herida y el ultraje se transformaron en depósito de medicina, en un hogar de amor."}, {"id": "973a4f66f9", "source": "La gran mentira (identidad)", "axis": ["vulnerabilidad", "kerigma"], "text": "Soy envuelto en papel de regalo, pero con un corazón de carne, listo para ser presencia y hogar de Jesús. Despreciado por este mundo, pero ciudadano de la fe. Despojado, para recibir las armas de Dios. Ultrajado, para parecerme a Jesús en su pasión. Robado, pero regalado con el tesoro del amor."}, {"id": "804f79b141", "source": "Sal de tu mente, entra en tu vida", "axis": ["confianza", "vulnerabilidad"], "text": "Tenemos una enorme ilusión que se manifiesta a través de palabras, pensamientos, creencias y estructuras mentales. Sin embargo, Amor, Vida y Dios no son ilusión, deseo, ansia o apegos. Debemos soltar nuestras ilusiones. Cuando soltamos las ilusiones, el corazón se desobstruye, y al no estar obstruido, el resultado es Amor y Vida."}, {"id": "6f9cb00509", "source": "Sal de tu mente, entra en tu vida", "axis": ["confianza"], "text": "El arquero, cuando dispara sin ningún premio en mente, ve con claridad y tiene a su disposición todas sus cualidades. Sin embargo, si dispara por un premio, este lo ciega. Cuando en el corazón no hay ilusión, ambición ni deseo de ser feliz por algo, conectamos con la Vida y con Dios."}, {"id": "eb88e83d80", "source": "Sal de tu mente, entra en tu vida", "axis": ["confianza"], "text": "¿Qué es lo que entorpece el amor? El apego. El apego aparece como tentación externa, se presenta en la vida como una propuesta, como una garrapata que se aferra, haciéndonos creer que esa propuesta nos dará felicidad. Decidimos sin tomar en cuenta otras perspectivas, nos convertimos en los señores de nuestra vida."}, {"id": "d96db92105", "source": "Sal de tu mente, entra en tu vida", "axis": ["confianza", "vulnerabilidad"], "text": "Aparecen dos sensaciones dispares: un destello de falsa felicidad que nos afirma que lo hemos hecho bien; y una segunda sensación de soledad, amenaza y miedo. Este miedo se va gestando en el corazón por la pérdida de la vida auténtica, al desplazar a Dios del centro de nuestra existencia."}, {"id": "d700b61956", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza"], "text": "Dios mío, estoy tan convencido de que velas por los que esperan en Ti, y de que nada puede faltar a quien lo espera todo de Ti, que he resuelto vivir en adelante sin ninguna preocupación y descargar en Ti todas mis inquietudes."}, {"id": "ed05851863", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza"], "text": "Los hombres podrán despojarme de los bienes y del honor; las enfermedades podrán quitarme las fuerzas y los medios de servirte; podré incluso perder tu gracia por el pecado; pero jamás perderé mi esperanza, la conservaré hasta el último momento de mi vida, y todos los demonios del infierno se esforzarán en vano por arrebatármela."}, {"id": "ba80e4a1d7", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza", "vulnerabilidad"], "text": "En cuanto a mí, Señor, toda mi confianza es mi misma confianza. No confío en mis méritos, ni en mis obras, ni en mis fuerzas. Solo confío en que Tú eres bueno y en que confiar en Ti basta. Es la confianza del hijo pequeño: no tiene riquezas ni virtudes perfectas, pero sabe que su Padre es fiel."}, {"id": "4e13215293", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza"], "text": "Imagina a un niño pequeño cruzando una calle peligrosa. No sabe calcular la velocidad de los autos, no entiende el peligro, no tiene fuerza para defenderse. Pero va tranquilo, porque va tomado de la mano de su padre. Su seguridad no está en su capacidad, está en la persona que lo sostiene."}, {"id": "acbdde98e9", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza"], "text": "Lo contrario de la confianza en Dios es la desconfianza, que se manifiesta sobre todo en el miedo excesivo, la desesperanza, el orgullo y la autosuficiencia. La confianza dice: “Dios puede”. La desconfianza dice: “Todo depende de mí”."}, {"id": "d97bd5e3d8", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza", "vulnerabilidad"], "text": "Cuando ha habido herida de abandono o abuso, la dificultad para confiar no es falta de fe, es una herida de protección. Tu corazón aprendió a sobrevivir. Empieza así: diferenciar a Dios de quienes te hirieron —Dios no abandona ni abusa, nunca estuvo del lado del daño—; confianza pequeña y concreta: “Señor, hoy te confío este momento”."}, {"id": "b4ac5b3be9", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza", "kerigma"], "text": "Para un corazón herido, imaginar el abrazo no es fantasía infantil, es una forma profunda de oración sanadora: Jesús, el que no invade, que no fuerza, que mira con ternura; María, refugio que no pregunta, no juzga, no presiona; el Espíritu Santo, presencia suave, como calor en el pecho, como paz que entra despacio."}, {"id": "a73c475d3d", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza"], "text": "Confianza como experimento, no como salto: no digas “me entrego totalmente”, di “hoy voy a probar confiar un 5%”. Construye micro-experiencias: cada vez que oras y sientes un poco de calma, dite “aquí hubo cuidado”. No necesitas sentir confianza para empezar, solo necesitas el deseo de confiar."}, {"id": "051ff27cd4", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza"], "text": "“Nada puede faltar a quien lo espera todo de Ti” no significa que no habrá dolor; significa que, aun en el dolor, Dios dará lo necesario para atravesarlo. La confianza aquí no es sentir seguridad total, es mover el peso, poquito a poco, de tus propias fuerzas hacia Él."}, {"id": "48ef618350", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza", "vulnerabilidad"], "text": "“Reconozco, por desgracia, que soy frágil e inconstante.” Aquí hay algo muy sanador: no se exige fortaleza perfecta. La confianza no se apoya en que tú no tiemblas, se apoya en que Dios sostiene cuando tiemblas."}, {"id": "498b319629", "source": "Acto de confianza (Claudio de la Colombière)", "axis": ["confianza"], "text": "“Espero que sostendrás mi debilidad, que me fortalecerás contra las más furiosas tentaciones y que harás triunfar mi flaqueza.” No dice ‘me haré fuerte’, dice ‘Tú sostendrás mi debilidad’. Eso cambia todo: tu fragilidad no es obstáculo, es el lugar donde Dios actúa."}, {"id": "c7b5a4ea63", "source": "No resistirse al mal", "axis": ["confianza", "kerigma"], "text": "Muchos teólogos argumentan que Dios otorga a los seres humanos el libre albedrío. Dios no interviene en cada decisión para preservar la autonomía humana. La voluntad de Dios a menudo se percibe como un misterio; en muchas tradiciones religiosas se enseña que Dios está presente con las personas en medio del sufrimiento, ofreciendo consuelo y esperanza."}, {"id": "6fd76528f3", "source": "No resistirse al mal", "axis": ["kerigma"], "text": "No te resistas al mal, eso hizo Jesús. Jesús no viene a cambiar el mal, si no se resiste, se deja atravesar por el mal. No puedo resistirme a un abuso y a las heridas tan graves que ocasiona; pero si las rechazo quedaré esclavo de mi dolor, el dolor cierra. Si lo acepto traerá un bien mayor a mi vida, y ese aceptar no es por obra mía, es el motivo de Jesús en mi vida."}, {"id": "fc941c7629", "source": "No resistirse al mal", "axis": ["vulnerabilidad", "kerigma"], "text": "Un abuso es algo terrible, causa daños estructurales serios, especialmente si está asociado con rechazos de vínculos primarios y se traiciona la confianza, como en mi caso. Solo Dios puede sanar esto. El dolor de un abuso es tan insoportable que a menudo se asocia con adicciones para escapar o con conductas autodestructivas. ¿Cómo puede encontrar paz una persona abusada? Solo a través del perdón, no hay otra forma."}, {"id": "55d90686d9", "source": "No resistirse al mal", "axis": ["kerigma"], "text": "Esta situación es una invitación a aceptar profundamente el kerigma y a adentrarnos más en el evangelio. Al no resistirnos, descubrimos el amor y podemos disponernos a amar. No estoy diciendo que justifiquemos el mal, que no pongamos límites, o que no hagamos justicia. No resistirnos significa comprender que esta es una oportunidad para generar VIDA."}, {"id": "89de6e1c7e", "source": "No resistirse al mal", "axis": ["kerigma", "vulnerabilidad"], "text": "El hacha está impregnada del perfume que emana la savia de un árbol que se está cortando. El árbol, en lugar de resistirse, dejó caer su savia y perfumó el hacha con su fragancia; el leñador, sorprendido, dejó de cortarlo y decidió cuidarlo. El árbol no se resistió al mal, y en su acto de aceptación y amor, transformó el corazón del leñador."}, {"id": "d2fb7b0e1e", "source": "No resistirse al mal", "axis": ["kerigma"], "text": "“No te resistas al mal.” Mateo 5:39: “Pero yo os digo: No resistáis al que es malo; antes bien, a cualquiera que te golpee en la mejilla derecha, vuélvele también la otra.” Jesús mismo ejemplificó esta enseñanza: no solo no resistió el mal, sino que lo dejó atravesar su ser, aceptando el sufrimiento con una mansedumbre divina. Esta entrega total no es un signo de debilidad, sino de una fuerza espiritual y una fe inquebrantable en el plan de Dios."}, {"id": "3ef53dc175", "source": "No resistirse al mal", "axis": ["kerigma"], "text": "Ojo, esto es muy importante: ¿qué nos dice el Kerigma que nos da la vida? ¿Qué es esto tan trascendental que el mismo Dios se hace hombre para el hombre? El psiquiatra me dijo que no tengo solución, que son heridas que no se pueden curar, pero el Kerigma hace que el aliento del Espíritu sople y donde hay muerte, se dé la vida."}, {"id": "5944974a32", "source": "No resistirse al mal", "axis": ["kerigma", "vulnerabilidad"], "text": "El Espíritu está contigo siempre. Ante el mal, ante aquello que te hiere, levanto la mejilla y miro cara a cara al mal, con la actitud de un niño agarrado a su padre. El monstruo que viene a verte disminuye su tamaño, se va achicando, mengua; y empieza a surgir el amor, como don, regalo. Eres, puedes, funciona, y esto se realiza porque eres amado."}, {"id": "722d87a4e1", "source": "No resistirse al mal", "axis": ["kerigma"], "text": "El Señor está en mi vida en las situaciones de dificultad, de enfermedad, de problemas, de disgustos, de dudas, de dolor, de falta de suelo, en soledad, tristeza, miedo, culpa, vergüenza, de debilidad, vulnerabilidad, de pecado, de muerte."}, {"id": "283dbacb7d", "source": "No resistirse al mal", "axis": ["kerigma"], "text": "Percibo y me reconozco en esta actitud de acoger, aceptar y reconocer que cada uno de nosotros, en función de nuestras inercias, estamos tocados por una inclinación que hace daño. Ni en espacios de personas abusadas, ni en espacios donde no se es afectado por el dolor del robo, se entiende esto, porque el dolor es tan grande que el perdón es un escándalo."}, {"id": "9a227f00b1", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "El Señor nos salva ahora, nos da la salvación ahora. Nos salva mediante su palabra, la buena noticia, el Kerigma; el amor de Dios se ha derramado en nuestros corazones. “Dios habita en nuestros corazones”, no estamos solos, contamos con Dios, ya no estamos solos."}, {"id": "5e4cd05a84", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "San Pablo dice que el Espíritu Santo da testimonio a nuestro espíritu, testifica a nuestro espíritu, contacta con mi espíritu, le asegura y le da certeza. Después de Cristo el Espíritu Santo es derramado en nuestros corazones; somos templos del Espíritu Santo, dice San Pablo."}, {"id": "71ce02dc9e", "source": "Kerigma. Agradecimiento", "axis": ["kerigma", "vulnerabilidad"], "text": "En la debilidad está mi fuerza, dice la palabra: ante mi incapacidad, le pido a Dios que lo haga por mí y descubro la fuerza de Cristo, se hace verdad la palabra, es la verdad de lo que me ocurre."}, {"id": "92fc7a209b", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Esta noticia es difícil de creer: a un hebreo le costaba mucho trabajo reconocer que Dios se hiciera hombre y muriera crucificado. “Maldito el que está colgado en un madero”. Pues bien, este hombre maldito, debilitado, vulnerable, alcanzable, es Dios, es el Kirios, el Adonai, es el Señor. “Dios con nosotros”."}, {"id": "2edfe38fc4", "source": "Kerigma. Agradecimiento", "axis": ["kerigma", "vulnerabilidad"], "text": "Siempre me pregunté: ¿Dónde estabas cuando me maltrataban, cuando era tan chico y me abusaban? ¿Dónde estabas cuando me robaron y me rompieron el alma? Y entendí que esa pregunta ya se la habían hecho a Jesús: “Si eres hijo de Dios, baja de la cruz y creeré.”"}, {"id": "ea7f12baa5", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Jesús no bajó de la cruz. Tenemos un Dios que no se baja de la cruz, sino que se clava contigo y con tu sufrimiento; bajó al infierno para acariciarme. No hay otro Dios cuya imagen sea de fracaso, desnudo, traspasado, abandonado, humillado; lo hace por mí y por ti."}, {"id": "720da0a98a", "source": "Kerigma. Agradecimiento", "axis": ["kerigma", "vulnerabilidad"], "text": "Lo peor que puede suceder en la vida es que el dolor te cierre; el dolor nos hace arisco, nos vuelve hacia nosotros mismos, el miedo al sufrimiento nos mata. Dejémonos acariciar, el dolor pide ser acariciado en el hondón del corazón."}, {"id": "6659258399", "source": "Kerigma. Agradecimiento", "axis": ["vulnerabilidad"], "text": "Qué hay en el hondón del corazón: rencor, dolor, culpa, vergüenza; huye, no acepta, rechaza; soledad, frustración, incapacidad, miedo, dureza; se queda en sí mismo, incapaz de reconocer la vulnerabilidad, controlar para no sentir la providencia, rechazo de la incertidumbre, falta de confianza, no sentir amor."}, {"id": "cd1810b975", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Dice San Juan de la Cruz: en el árbol donde tu madre fue violada te di la mano y fuiste restaurada. Dice San Pablo que si Cristo murió por todos los hombres es porque todos los hombres experimentan la muerte; conozco el bien pero no tengo la capacidad para realizarlo, no hago el bien que quiero sino el mal que no quiero; no soy yo sin el pecado que habita en mí."}, {"id": "1f699ba9b4", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "El Kerigma tiene la fuerza de romper desde dentro, por medio del Espíritu Santo, barreras interiores para llegar a nuestra razón. En la aceptación de esta buena noticia correrán desde nuestro interior ríos de agua viva, la Vida nueva desde el centro de nuestra alma. Así actúa Dios; el demonio actúa de forma contraria, desde el exterior, mediante la tentación."}, {"id": "71752871be", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Cristo nos ha amado así, con esta fuerza, hasta estos extremos, y esto hay que anunciarlo: el Señor nos ama hasta morir, le da igual como seamos y qué hayamos hecho, nos ama con una fuerza hasta el extremo. No somos felices porque no vivimos conscientes de este amor que ya lo tenemos."}, {"id": "7fcb1bea31", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Esta es la verdad: Dios nos ama, se hizo hombre y asumió nuestra responsabilidad para que pudiéramos vivir del amor y por tanto ser libres. Solo el Espíritu testifica este amor en el fondo de nuestra alma. Nos ama hasta morir, hasta entregarse, hasta agotarse, se hace fracaso, abandonado, humillado, despojado, abusado, maltratado, despreciado, Varón de dolores; así nos quiere Cristo, así me ama."}, {"id": "532bd5d4a6", "source": "Kerigma. Agradecimiento", "axis": ["kerigma", "vulnerabilidad"], "text": "Este hombre que sufrió hasta ser abandonado por el mismo Dios, se humilló y se rebajó hasta no ser nada, y en esa nada dice: “Padre, perdónalos porque no saben lo que hacen”. Este mismo, en los últimos momentos de su vida, nos dio lo íntimo, lo primario, lo vital, lo primero que un ser humano necesita: una madre."}, {"id": "839a10be96", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "El Espíritu Santo te da el regalo de la Fe, y la Fe es decir que sí al amor de Cristo, entrar en un proceso de vivificación; este amor reconstruye mediante el soplo del Espíritu, como hizo en el principio, sopla y nos da vida. Es la perla que hace vender todo lo demás para comprar esto; es gratis, no tenemos que hacer nada, no tenemos que ser nada."}, {"id": "cf3d0f0969", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "El Señor sigue diciendo: no hagáis frente al mal, déjate atravesar por el mal, este se destila, se transforma, por medio del Espíritu. Cuál es este mal: se dirige a tu imagen, a tu tener y a tu ser; es el pecado de origen que origina el resto de los pecados, pero esto no por nosotros sino por el Espíritu que el Señor da a quien se deja acariciar por el amor."}, {"id": "68b6045b3a", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Cristo está ahora mismo, en este instante, ofreciendo por los que escuchan sus llagas; intercede por ti, te llama por tu nombre, te redime, te consuela, y te dice: eres mío, tú eres mío. El Padre solo ve el amor de este; el Espíritu, ante tanto amor, testifica lo que escucha en este momento."}, {"id": "2bf765fbc3", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Dios no necesita que tú le ames para amarte, Dios no necesita que tú seas bueno para amarte, Dios no necesita que tú tengas buena voluntad para amarte. Dios te ama ahora, sin ninguna condición, ni siquiera tenemos que cambiar de vida para que nos ame. Te ama como eres, con toda tu debilidad y vulnerabilidad, con tus miedos y fracasos, con tus heridas y tus traumas."}, {"id": "9e04c4bab8", "source": "Kerigma. Agradecimiento", "axis": ["kerigma"], "text": "Nosotros estamos muertos, nuestro espíritu carece de vida; el Kerigma hace que el Espíritu sople a nuestro espíritu como a Lázaro, nos devuelve la vida. Dios desea ser uno contigo ahora, Dios nos ama ahora."}, {"id": "02ade08517", "source": "Kerigma. Agradecimiento", "axis": ["kerigma", "vulnerabilidad"], "text": "Por lo tanto, en el sufrimiento se esconde un tesoro que el Señor nos señala. ¿Cómo puede el sufrimiento ser una bendición? “Bienaventurados los que sufren”. ¿Qué me dice Jesús sobre el dolor? Su palabra nos dice: “No te resistas al mal, no te resistas al dolor.”"}, {"id": "b9208b4704", "source": "2 Corintios: debilidad y fuerza", "axis": ["vulnerabilidad"], "text": "Y me ha dicho: Bástate mi gracia; porque mi poder se perfecciona en la debilidad. Por tanto, de buena gana me gloriaré más bien en mis debilidades, para que repose sobre mí el poder de Cristo. Por lo cual, por amor a Cristo me gozo en las debilidades, en afrentas, en necesidades, en persecuciones, en angustias; porque cuando soy débil, entonces soy fuerte. (2 Corintios 12:9-10)"}, {"id": "f5922eb8c9", "source": "2 Corintios: debilidad y fuerza", "axis": ["vulnerabilidad", "kerigma"], "text": "El amor de Cristo nos constriñe, nos apremia, nos motiva, nos impulsa: si uno murió por todos, luego todos murieron; y él por todos murió, para que los que viven ya no vivan para sí, sino para aquel que murió y resucitó por ellos. Si alguno está en Cristo, nueva criatura es; las cosas viejas pasaron, todas son hechas nuevas."}, {"id": "3c458b9844", "source": "2 Corintios: debilidad y fuerza", "axis": ["kerigma"], "text": "Dios estaba en Cristo reconciliando consigo al mundo, no tomándoles en cuenta a los hombres sus pecados, y nos encargó a nosotros la palabra de la reconciliación. Somos embajadores en nombre de Cristo, como si Dios rogase por medio de nosotros: reconciliaos con Dios."}, {"id": "4da5d9b8fc", "source": "2 Corintios: debilidad y fuerza", "axis": ["kerigma"], "text": "Al que no conoció pecado, por nosotros lo hizo pecado, para que nosotros fuésemos hechos justicia de Dios en él. Él tomó mi infierno aquí abajo, en la tierra, para que yo pudiera tener su cielo allá arriba. Lo hizo por mí."}, {"id": "e64380d66f", "source": "2 Corintios: debilidad y fuerza", "axis": ["vulnerabilidad"], "text": "Toda la humanidad se encuentra bajo la sentencia de muerte desde Adán. El Señor Jesucristo vino a este mundo, descendió hasta el valle donde estábamos, al lugar de la muerte, y murió por todos. Pero después resucitó, y llevó a todos los creyentes a vivir una vida de resurrección, a los lugares celestiales."}, {"id": "b8436aebce", "source": "Contemplación para alcanzar amor (Ejercicios de San Ignacio)", "axis": ["kerigma"], "text": "El amor se debe poner más en las obras que en las palabras. El amor consiste en comunicación de las dos partes: en dar y comunicar el amante al amado lo que tiene, y así, por el contrario, el amado al amante."}, {"id": "7d498095b7", "source": "Contemplación para alcanzar amor (Ejercicios de San Ignacio)", "axis": ["kerigma"], "text": "Pedir conocimiento interno de tanto bien recibido, para que yo, enteramente reconociendo, pueda en todo amar y servir a su divina majestad. Es percibir la realidad como don: hasta lo negativo, donde la Divinidad parece esconderse, desemboca en una manifestación de los verdaderos y santísimos efectos de ella, en la Pascua."}, {"id": "a72334ce23", "source": "Contemplación para alcanzar amor (Ejercicios de San Ignacio)", "axis": ["kerigma"], "text": "Traer a la memoria los beneficios recibidos de creación, redención y dones particulares, ponderando con mucho afecto cuánto ha hecho Dios por mí. Tomad, Señor, y recibid toda mi libertad, mi memoria, mi entendimiento y toda mi voluntad, todo mi haber y mi poseer; Vos me lo distes; a Vos, Señor, lo torno; todo es vuestro, disponed a toda vuestra voluntad; dadme vuestro amor y gracia, que ésta me basta."}, {"id": "081d1e475d", "source": "El Sí de Jesús y el No de Adán", "axis": ["kerigma"], "text": "Jesús, en la última cena, muestra su entrega total en tres aspectos: la física —tomad y bebed, este es mi cuerpo y mi sangre, entregada para el perdón—; la psicológica —Abba, si es posible aparta de mí este momento, pero que no se haga mi voluntad, sino la tuya—; y la experiencial —todo se ha cumplido, madre, ahí tienes a tu hijo; Padre, ¿por qué me has abandonado?"}, {"id": "b21d318fa8", "source": "El Sí de Jesús y el No de Adán", "axis": ["kerigma", "confianza"], "text": "El “No” de Adán en el Jardín del Edén se contrapone al “Sí” de Cristo en Getsemaní. Adán y Eva dicen No a Dios y Sí a la tentación; Jesús dice Sí a Dios y No a su propio deseo de evitar el sufrimiento, confiando en que Dios es el Señor de la historia."}, {"id": "0ee577e7e6", "source": "El Sí de Jesús y el No de Adán", "axis": ["vulnerabilidad", "confianza"], "text": "Yo soy incapaz de ser como Jesús. Le digo a Dios: no por miedo al sufrimiento, mi ‘sí, no’ va ligado a que no me resista al mal, a que me deje atravesar por el sufrimiento; pero esto yo no puedo solo, sin ayuda del Señor: “para los hombres es imposible, mas no para Dios.”"}, {"id": "f96232bdbf", "source": "El Sí de Jesús y el No de Adán", "axis": ["kerigma", "confianza"], "text": "Jesús es el Sí de Dios, y yo soy el No a Dios; solo mi vida puede ser un Sí estando unido a Jesús. El Sí de Jesús es el Sí de María: “He aquí la sierva del Señor; hágase conmigo conforme a tu palabra.”"}, {"id": "88f21a6db4", "source": "El Sí de Jesús y el No de Adán", "axis": ["vulnerabilidad", "kerigma"], "text": "Solo en unión con Jesús podemos realmente decir Sí a Dios. Reconocer nuestras limitaciones humanas y aceptar nuestra necesidad de la gracia de Dios nos abre a la acción transformadora de Jesús en nuestras vidas."}, {"id": "b4dbfc720a", "source": "En lo profundo del corazón", "axis": ["vulnerabilidad"], "text": "En lo profundo del corazón se encuentran emociones complejas y contradictorias: rencor, dolor, culpa y vergüenza. Estas emociones se ocultan bajo capas de negación y rechazo. El corazón, en su intento de protegerse, huye de estas sensaciones, incapaz de aceptarlas y procesarlas."}, {"id": "4ba8066e94", "source": "En lo profundo del corazón", "axis": ["vulnerabilidad", "confianza"], "text": "El miedo y la dureza se convierten en escudos que el corazón usa para protegerse del dolor. Sin embargo, estos escudos también lo aíslan, impidiéndole experimentar la verdadera vulnerabilidad. La falta de confianza en sí mismo y en los demás es un resultado directo de este rechazo a la incertidumbre."}, {"id": "57823fe5d6", "source": "En lo profundo del corazón", "axis": ["confianza", "kerigma"], "text": "La confianza y la suavidad se convierten en puentes que el corazón usa para conectarse con los demás y con el mundo. Estos puentes permiten experimentar la verdadera vulnerabilidad, una fuente de fortaleza y autenticidad. Esto se puede vivir solo cuando soy consciente de que estoy sostenido por Jesús."}, {"id": "bf535459bb", "source": "En lo profundo del corazón", "axis": ["kerigma", "confianza"], "text": "La confianza y la suavidad, sostenidas por la fe en Jesús, se transforman en una fuente de fortaleza y autenticidad. La aceptación de la providencia y la apertura a la incertidumbre se basan en la confianza en el plan divino de Jesús, lo que crea un espacio para la paz interior."}, {"id": "fd160e1e96", "source": "Jesús y el sufrimiento (San Pablo)", "axis": ["vulnerabilidad", "confianza"], "text": "En el Jardín de Getsemaní, Jesús oró fervientemente antes de su arresto, mostrando su propia angustia y miedo al sufrimiento. Sin embargo, también mostró una entrega completa a la voluntad de Dios: “No se haga mi voluntad, sino la tuya.”"}, {"id": "f7b4629b7d", "source": "Jesús y el sufrimiento (San Pablo)", "axis": ["confianza"], "text": "Dios cuida de sus hijos: Jesús enseña a confiar en la providencia de Dios, quien cuida de cada detalle de nuestras vidas (Mateo 6:25-34). Esta confianza puede ayudar a mitigar el miedo al sufrimiento, sabiendo que Dios está en control y cuida de nosotros."}, {"id": "027de69a74", "source": "Jesús y el sufrimiento (San Pablo)", "axis": ["vulnerabilidad"], "text": "Hebreos 2:15 dice que Jesús vino “a librar a todos los que por el temor de la muerte estuvieron durante toda la vida sujetos a servidumbre”. El miedo a la muerte puede esclavizar a las personas, manteniéndolas en una vida de temor y ansiedad; a través de Jesús los creyentes pueden ser liberados de este miedo, encontrando libertad y paz."}, {"id": "2c58f373b7", "source": "Jesús y el sufrimiento (San Pablo)", "axis": ["vulnerabilidad"], "text": "San Pablo comparte su experiencia personal de cómo la gracia de Dios es suficiente y cómo el poder de Dios se perfecciona en nuestra debilidad. Aceptar nuestras debilidades y dificultades puede permitir que el poder de Cristo actúe más plenamente en nosotros. (2 Corintios 12:9-10)"}, {"id": "89d256e81f", "source": "Jesús y el sufrimiento (San Pablo)", "axis": ["vulnerabilidad", "confianza"], "text": "“Porque no nos ha dado Dios espíritu de cobardía, sino de poder, de amor y de dominio propio.” (2 Timoteo 1:7) El miedo no viene de Dios; en lugar de un espíritu de cobardía, Dios nos ha dado un espíritu de poder, amor y dominio propio, lo cual nos permite enfrentar el sufrimiento con valentía y confianza."}, {"id": "47da35f462", "source": "El perdón a mis padres", "axis": ["vulnerabilidad", "kerigma"], "text": "“Tienes que ir a tus padres y pedirles perdón por el espíritu de juicio que has tenido contra ellos.” El Señor quería que hiciera un puente en la brecha, que me enfrentara con el hecho de que mis padres no eran los culpables de una serie devastadora de eventos, sino que ellos mismos eran víctimas y herramientas usadas por el enemigo."}, {"id": "4774cc2851", "source": "El perdón a mis padres", "axis": ["kerigma"], "text": "Vi la totalidad de lo que Cristo había conseguido en la cruz: una verdad profunda desde una perspectiva eterna. Es la obra redentora, la sangre derramada que nos permite tener comunión en su sufrimiento y experimentar el poder de la resurrección."}, {"id": "782cbb6a28", "source": "El perdón a mis padres", "axis": ["kerigma", "vulnerabilidad"], "text": "Queridos papá y mamá: ¿Cuántas palabras pasaron entre nosotros durante los años silenciosos? He visto la profundidad de tu dolor, en tus ojos desesperación y aflicción. He ido delante del Salvador y he pedido por tu recuperación."}, {"id": "5b136bbcec", "source": "El perdón a mis padres", "axis": ["kerigma"], "text": "Entonces Jesús me llevó a Su cruz, y dijo: “Está todo hecho. Lo pagué todo, hace tanto tiempo, para que en mí... seáis uno.” Papá, mamá, ¿me perdonaréis por todo el juicio que he impuesto? Y que andemos restaurados en el amor que Él ha descubierto."}, {"id": "c085955a06", "source": "El perdón a mis padres", "axis": ["kerigma", "vulnerabilidad"], "text": "Las lágrimas fluyendo de sus ojos me dieron la respuesta. En aquel momento, el espíritu de juicio fue roto. ¡Cuán bondadoso y paciente mi Señor es conmigo! No me mantenía responsable por algo que no había entendido."}, {"id": "44ec1c5ae1", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Lo que voy a hacer aquí esta tarde es muy importante: anunciaros el Evangelio, la buena noticia. Dios ha querido salvar al mundo a través de la necesidad de la predicación, de una cosa tan simple aparentemente como el encuentro de esta tarde."}, {"id": "40cfa5db65", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Cristo Jesús ha muerto por todos los hombres, porque todos necesitamos ser salvados, y ha dado la vida por ti y por mí. Mirad la cruz. ¿Qué es lo que vemos en ella? La imagen de un hombre crucificado. Ese que habéis matado era Dios."}, {"id": "7fa1f5a3f4", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Adiós, un hebreo no lo puede ni siquiera nombrar: aceptar que Cristo es el Mesías y que había resucitado de la muerte, aceptar que un hombre fuera Dios, era para un hebreo imposible. Este hecho de que el Espíritu Santo descendiera sobre los hombres y los transformara era un acontecimiento nuevo, totalmente inaudito."}, {"id": "b0f0b8f774", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Cristo ha muerto por ti, para que tú no mueras. Aquel pobrecillo que murió y estaba sufriendo allí en Jerusalén hace dos mil años estaba ofreciendo su sufrimiento y su muerte por ti, concretamente, porque necesitas cambiar de vida. Cristo ha dado la vida para que puedas vivir una vida distinta por el poder de su Espíritu. Gratis."}, {"id": "5776f7f7d3", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma", "vulnerabilidad"], "text": "Yo soy en la medida en que soy amado por alguien; alguien me ha dado el ser, ha querido que existiera. Existimos en cuanto que somos amados por alguien. Jesucristo ha muerto por ti; ha dado la vida por ti, entre dos malhechores, por ti."}, {"id": "3a12a4a747", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Cristo entra en el cielo para hacer una obra para ti: presenta ante el Padre sus llagas gloriosas, llagas que demuestran que muriendo en la cruz hizo testamento al Padre de su mismo amor, testamento para ti. Alguien te dejó un testamento gratis, pero tienes que ir a recogerlo."}, {"id": "f0edb1092c", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Cristo ha dado la vida por ti no por ti bueno, sino por ti pecador, mentiroso, falso, envidioso. Esa es la prueba más grande del amor: dar la vida por uno que no vale, por un malvado. Este amor es Dios."}, {"id": "6c29e1db4a", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Dios está deseando entrar dentro de ti, ser uno en ti mediante el Espíritu Santo. ¿Qué es convertirte? Creer que Dios está deseando ahora mismo entrar dentro de ti; dejar tu vida en manos de Dios."}, {"id": "e73e38158e", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Dios es amor y el hombre que vive en el pecado está solo. Y la soledad es el infierno; la comunidad es la Iglesia y la Iglesia es una comunión. Mirad cómo se aman, decían de los cristianos durante el Imperio Romano."}, {"id": "51c299b37d", "source": "Kerigma de Kiko Argüello, JMJ 2023", "axis": ["kerigma"], "text": "Cristo jamás me riñe, me quiere siempre, me perdona siempre. Si caigo, me dice: ánimo, quico, levántate. Le pregunto cuando yo no puedo más: Señor, ¿me amas? Y me responde: ¿cómo no te voy a amar? Ánimo, que yo estoy contigo, no calles, ánimo."}, {"id": "0fcb59464f", "source": "Teodicea y responsabilidad", "axis": ["vulnerabilidad"], "text": "Quiero abordar este tema desde mi propia experiencia, desde una infancia marcada por la falta de vínculos seguros, padres heridos por sus propios contextos y vivencias. Crecí con limitaciones y deformaciones primarias debido a la carencia de relaciones sanas. Esta es la primera carta que se me repartió en la vida, y no fue buena."}, {"id": "6b9c7b8c61", "source": "Teodicea y responsabilidad", "axis": ["vulnerabilidad"], "text": "La segunda vez que las cartas se volvieron a repartir fue en mi adolescencia, donde enfrenté experiencias de abuso continuo. Estas cartas tampoco fueron buenas, dejaron heridas sexuales, afectivas, emocionales, entre otras."}, {"id": "96fb1824ae", "source": "Teodicea y responsabilidad", "axis": ["kerigma", "vulnerabilidad"], "text": "Dios, viendo esta infección, envía a su Hijo para ofrecer sanación a todo aquel que crea en él. Jesús se presenta como el antídoto frente al virus que nos afecta. Lo único lógico y sensato que se me ocurre es decir “¡Sí!”, a aceptar esa sanación y ese amor ofrecido."}, {"id": "9f1bf81de9", "source": "Teodicea y responsabilidad", "axis": ["kerigma"], "text": "Sin embargo, en este escenario se revela un acto de amor: Dios envía a su Hijo, Jesús, como antídoto a este mal, “obediente hasta la muerte y muerte de cruz”. Lo único que puedo hacer desde mi impotencia ante este evento que me supera es abrirme a la solución de Dios en Jesús."}, {"id": "dfa7c3daf8", "source": "Ansiedad y aceptación", "axis": ["confianza", "vulnerabilidad"], "text": "La confianza en Jesús no significa que busquemos que la ansiedad desaparezca de inmediato. Se trata de confiar en Su presencia y Su propósito, incluso mientras la ansiedad está presente. No es usar a Jesús para solucionar la ansiedad, sino descansar en Él mientras atraviesas esa experiencia."}, {"id": "5c1b23f4a5", "source": "Ansiedad y aceptación", "axis": ["confianza"], "text": "En lugar de decir “voy a confiar en Jesús para que me quite esta ansiedad”, puedes decir: “confío en que Jesús me acompaña en este momento, incluso si siento ansiedad. No tengo que luchar, porque estoy en Sus manos.”"}, {"id": "9cafe1b134", "source": "Ansiedad y aceptación", "axis": ["confianza", "kerigma"], "text": "En el relato de la tormenta calmada, los discípulos estaban aterrorizados por las olas, pero Jesús dormía en la barca. Al despertarlo, calma la tormenta, pero también pregunta: “¿por qué tenéis tanto miedo? ¿todavía no tenéis fe?” Jesús está contigo incluso en la tormenta, aunque no se disipe de inmediato."}, {"id": "393fe73474", "source": "Ansiedad y aceptación", "axis": ["confianza"], "text": "Señor Jesús, siento ansiedad en este momento, y reconozco que es incómodo. En lugar de luchar contra lo que siento, decido confiar en tu presencia. No necesito que esta sensación desaparezca para descansar en ti. Dame la gracia para aceptar lo que siento y la confianza para dejarlo en tus manos, sin expectativas, sabiendo que Tú tienes cuidado de mí."}, {"id": "b8ece9e664", "source": "Ansiedad y aceptación", "axis": ["confianza"], "text": "No dices “confío en ti para que me quites esto”, sino “confío en ti, pase lo que pase, incluso mientras siento esto.” Esta postura elimina el deseo de control y te permite aceptar lo que estás viviendo como parte del momento presente, sabiendo que estás sostenido por Su amor."}, {"id": "62cc793c89", "source": "Oración: corazón traspasado", "axis": ["kerigma", "vulnerabilidad"], "text": "Jesús está clavado en la cruz, y se nos invita a mirar al Traspasado. Yo también estoy traspasado: por el miedo, la culpa, la ira y la vergüenza. Pero a diferencia de Jesús, yo tengo un lugar donde estar, aunque me duela. Ese lugar es su corazón traspasado."}, {"id": "77fa384648", "source": "Oración: corazón traspasado", "axis": ["kerigma"], "text": "Aun en el dolor del Viernes Santo, el corazón de Jesús permanece vivo, cálido, y lleno de amor. Es en su corazón herido donde encuentro refugio y alivio para mi propio dolor. Estoy crucificado con Cristo; mis heridas se unen a las suyas, pero en esa unión encuentro esperanza."}, {"id": "b99c3807cc", "source": "Oración: corazón traspasado", "axis": ["kerigma", "vulnerabilidad"], "text": "“Ven. Mis heridas también son tuyas. Mi corazón traspasado tiene espacio para tu carga. Déjala aquí, en mi herida abierta. Yo la llevaré contigo.” Con cuidado, el hombre colocó su miedo, su culpa, su ira y su vergüenza en el corazón de Jesús. Al hacerlo, sintió un calor que nunca antes había conocido."}, {"id": "7d60a82084", "source": "Oración: corazón traspasado", "axis": ["kerigma"], "text": "¡Cuánto frío hace en Belén! En medio de la noche fría, encontré calor en un lugar inesperado: un pesebre humilde donde estaba Jesús, un niño pequeño, frágil, pero con un amor tan inmenso que podía llenar todo el universo. En esa pobreza, en ese frío, Jesús ofreció algo más grande que cualquier riqueza: ofreció calor."}, {"id": "3d04b24716", "source": "Oración: corazón traspasado", "axis": ["kerigma", "vulnerabilidad"], "text": "El calor de Dios no es un calor ardiente ni estruendoso, sino uno humilde y discreto, como el mismo Jesús. Es un calor que no busca imponerse, sino acompañarme en mi fragilidad. No elimina de inmediato mis sombras, pero sí ilumina lo suficiente para que no me pierda en ellas."}, {"id": "d1c035f18e", "source": "Oración: corazón traspasado", "axis": ["kerigma"], "text": "“Venid a mí los que estáis trabajados y cargados, y yo os haré descansar.” Sus palabras cobran vida en ese calor. No importa cuán pesada sea mi carga, Él está ahí, ofreciendo descanso, ofreciendo su propio corazón como refugio."}, {"id": "8f9007c062", "source": "Oración: corazón traspasado", "axis": ["kerigma", "vulnerabilidad"], "text": "Cuando la culpa me golpea con su peso, el calor me recuerda que hay perdón, un perdón que ya ha sido dado. Cuando la vergüenza me encierra, el calor me dice que soy visto, conocido y amado, tal como soy. Es un calor que no desaparece, incluso cuando la vida me parece fría y dura."}, {"id": "51b01d90fa", "source": "Sobre mi vida", "axis": ["vulnerabilidad"], "text": "A lo largo de mi vida experimenté vínculos desequilibrados que marcaron profundamente mi forma de ser. Me sentí abandonado, con mucho miedo hacia mi padre, quien imponía una disciplina rígida que minaba mi autoestima. Sé que no actuaron con la intención de hacer daño, sino porque no podían manejar sus propias vidas."}, {"id": "f5b3692879", "source": "Sobre mi vida", "axis": ["kerigma", "vulnerabilidad"], "text": "Dentro de mí reconozco una presencia inmutable: Jesús. Esta presencia me ha sostenido incluso cuando trato de ocultar mi dolor y mis heridas tras máscaras y formas de vida adaptadas para encajar. Ahora soy consciente de que estas máscaras son mentiras que me atrapan en una realidad ficticia."}, {"id": "67e9a5f807", "source": "Sobre mi vida", "axis": ["kerigma", "vulnerabilidad"], "text": "Tengo dos opciones: continuar escondiéndome tras las mentiras o vivir desde la verdad, con autenticidad, aunque sea desde mi vulnerabilidad. Creo que en este estado, por muy limitado que sea, puedo caminar junto a Jesús, quien ha estado presente en mi vida desde siempre."}, {"id": "45371258ea", "source": "Sobre mi vida", "axis": ["confianza", "kerigma"], "text": "Jesús te invita a descansar en Él, reconociendo tus cargas y limitaciones (Mateo 11:28-30). “Cercano está el Señor a los quebrantados de corazón; y salva a los contritos de espíritu” (Salmo 34:18). Dios está especialmente presente con aquellos que sufren y reconocen su necesidad de Él."}, {"id": "a32d566932", "source": "Sobre mi vida", "axis": ["confianza"], "text": "“La paz os dejo, mi paz os doy; yo no os la doy como el mundo la da. No se turbe vuestro corazón, ni tenga miedo” (Juan 14:27). La paz de Jesús no depende de las circunstancias externas ni de nuestras propias fuerzas. No caminas solo y Dios se manifiesta en medio de la verdad, no en la mentira o las máscaras."}, {"id": "c84c2a00bf", "source": "El niño y el fuego curioso", "axis": ["vulnerabilidad"], "text": "Sufriste un accidente de niño, la magnitud del dolor físico, combinado con el contexto emocional, marcó una experiencia difícil de integrar para tu mente infantil. La reacción de tus padres añadió una capa emocional compleja, una atmósfera de reproches y tensión que amplificó la sensación de inseguridad."}, {"id": "3664d7848e", "source": "El niño y el fuego curioso", "axis": ["vulnerabilidad"], "text": "Un vecino te llevó en su carro hacia el Hospital; estabas con tu padre, pero su presencia no te calmaba. Los pasillos del hospital eran largos y oscuros, y aunque muchas personas intentaban ayudarte, sentías que estabas solo en un mundo grande y extraño."}, {"id": "1d19362ec1", "source": "El niño y el fuego curioso", "axis": ["kerigma", "vulnerabilidad"], "text": "Hubo un momento en que un aroma familiar llenó el aire: era tu abuela, que había llegado para estar a tu lado. Sentiste su cálido abrazo y el suave olor de su ropa. Con el tiempo, la marca sanó, aunque quedó un recuerdo: incluso en los momentos más difíciles, siempre hay un lugar para la esperanza."}, {"id": "9e8e7dae7a", "source": "El niño y el fuego curioso", "axis": ["vulnerabilidad"], "text": "Fue un accidente, no una culpa tuya. Los recursos emocionales de tus padres eran limitados; ellos estaban atrapados en sus propias luchas internas. Este evento fue significativo, pero ahora puedes procesarlo con las herramientas de un adulto, reconectando con el niño curioso, sensible y lleno de vida que merecía sentirse amado y seguro."}, {"id": "47f3716b54", "source": "Miedo, tristeza, culpa, vergüenza", "axis": ["vulnerabilidad"], "text": "El miedo es una emoción válida y tiene una función: protegernos. En lugar de reprimirlo, permite que esté presente. Puedes decirte a ti mismo: “está bien sentir miedo, es parte de mi experiencia”."}, {"id": "67b5ff28af", "source": "Miedo, tristeza, culpa, vergüenza", "axis": ["kerigma", "vulnerabilidad"], "text": "La Iglesia enseña que el sufrimiento, incluido el miedo, puede tener un valor redentor cuando se ofrece a Dios con amor y confianza, unido al sacrificio de Cristo: “ahora me alegro en medio de mis sufrimientos por ustedes, y voy completando en mi carne lo que falta a los sufrimientos de Cristo” (Colosenses 1:24)."}, {"id": "dff849bee8", "source": "Miedo, tristeza, culpa, vergüenza", "axis": ["confianza", "kerigma"], "text": "El miedo puede ser un llamado a confiar más en Dios. “La paz les dejo; mi paz les doy. Yo no se la doy a ustedes como la da el mundo. No se angustien ni se acobarden” (Juan 14:27). Meditar en la Pasión de Cristo, quien también experimentó temor en Getsemaní, pero lo entregó al Padre."}, {"id": "c33ffd8e31", "source": "Miedo, tristeza, culpa, vergüenza", "axis": ["confianza"], "text": "“Vengan a mí todos los que están cansados y agobiados, y yo les daré descanso” (Mateo 11:28). Tu miedo puede convertirse en una ofrenda de amor, unida a la cruz de Cristo, para la salvación de las almas y el crecimiento de tu fe."}, {"id": "791a7d84ce", "source": "Frustración y humildad ante Dios", "axis": ["vulnerabilidad", "confianza"], "text": "San Pablo expresa esta lucha interior: “no hago el bien que quiero, sino el mal que no quiero” (Romanos 7:15-20). Pablo reconoce su debilidad y su incapacidad para cumplir plenamente la ley de Dios por sus propias fuerzas. Sin la gracia de Dios, no podemos superar nuestras limitaciones."}, {"id": "e3b9dfd70a", "source": "Frustración y humildad ante Dios", "axis": ["confianza"], "text": "“Bienaventurados los pobres en espíritu, porque de ellos es el reino de los cielos” (Mateo 5,3). Ser pobres en espíritu significa reconocer nuestra dependencia de Dios, aceptar nuestra debilidad y confiar en su misericordia. La humildad nos libera de la frustración."}, {"id": "c3385c784f", "source": "Frustración y humildad ante Dios", "axis": ["kerigma", "vulnerabilidad"], "text": "En la cruz, Jesús revela el misterio del amor de Dios frente a nuestra debilidad. “Dios escogió lo débil del mundo para avergonzar a los fuertes” (1 Corintios 1:27-29). La cruz es un recordatorio de que, en nuestra debilidad, la gracia de Dios se manifiesta con mayor fuerza."}, {"id": "166e3a6944", "source": "Frustración y humildad ante Dios", "axis": ["confianza", "vulnerabilidad"], "text": "“Abba, Padre, todo es posible para ti; aparta de mí este cáliz, pero no sea lo que yo quiero, sino lo que quieras tú” (Marcos 14:36). Jesús muestra cómo la humildad y la confianza en el Padre pueden transformar la frustración y el sufrimiento en un acto de amor y entrega."}, {"id": "77267d7176", "source": "Frustración y humildad ante Dios", "axis": ["vulnerabilidad", "confianza"], "text": "Jesús, en Juan 15:5, dice claramente: “separados de mí, nada podéis hacer”. Nuestra autosuficiencia es una ilusión. La frustración que sientes puede ser una señal de que estás intentando ser desde tus propias fuerzas, en lugar de abrirte a la gracia y al amor de Dios."}, {"id": "56b65d9962", "source": "Frustración y humildad ante Dios", "axis": ["kerigma", "vulnerabilidad"], "text": "Dios no nos pide que seamos perfectos por nuestras propias fuerzas, sino que reconozcamos nuestra dependencia de Él. Es en nuestra debilidad donde su gracia se manifiesta con mayor fuerza: “cuando soy débil, entonces soy fuerte” (2 Corintios 12:10). Jesús experimentó la tentación, el cansancio, el dolor y la frustración."}, {"id": "8280f3c0e6", "source": "Frustración y humildad ante Dios", "axis": ["confianza", "kerigma"], "text": "“Ya no vivo yo, sino que Cristo vive en mí” (Gálatas 2:20). Este es el secreto de la vida cristiana: dejar que Cristo sea el centro de nuestro ser, en lugar de intentar ser desde nuestras propias fuerzas. Dios te quiere así: frágil, dependiente y abierto a su gracia."}, {"id": "efa80822ae", "source": "Ofrecer el sufrimiento por otros", "axis": ["kerigma", "vulnerabilidad"], "text": "Señor Jesús, hoy vengo ante ti con el corazón cargado de dolor y miedo. Te ofrezco todo lo que estoy sintiendo, cada lágrima, cada angustia, cada momento de incertidumbre. Lo pongo en tus manos, confiando en que tú lo transformarás en gracia y bendición para aquellos por quienes quiero interceder."}, {"id": "49e13234b7", "source": "Ofrecer el sufrimiento por otros", "axis": ["kerigma"], "text": "“El sufrimiento humano completa lo que falta a los padecimientos de Cristo” (cf. Colosenses 1:24). El sufrimiento, unido al de Cristo, puede tener un valor salvífico para los demás; los cristianos están llamados a colaborar con Él en la redención del mundo, ofreciendo sus propios sufrimientos por los demás."}, {"id": "965aac57ba", "source": "Ofrecer el sufrimiento por otros", "axis": ["kerigma"], "text": "El sufrimiento de Cristo no fue un accidente, sino un acto de amor y obediencia al Padre por la salvación de la humanidad. A través de su sufrimiento, Jesús dio un nuevo sentido al dolor humano: ya no es solo una experiencia negativa, sino una oportunidad para unirse a Él."}, {"id": "7443f0ceb7", "source": "Ofrecer el sufrimiento por otros", "axis": ["kerigma", "confianza"], "text": "El sufrimiento no tiene la última palabra. La Resurrección de Jesús es la garantía de que el dolor y la muerte serán vencidos. Los cristianos están llamados a vivir el sufrimiento con esperanza, sabiendo que es un camino hacia la gloria eterna."}, {"id": "6a98b92d3d", "source": "Santos que acompañan", "axis": ["confianza", "vulnerabilidad"], "text": "Soy un alma muy pequeña, que solo puede ofrecer cosas muy pequeñas a Nuestro Señor. Santa Teresita quiso recorrer “el camino del niño que se duerme sin miedo en los brazos de su padre”: he de soportarme tal y como soy, con todas mis imperfecciones, y buscar un camino bien derecho, muy breve, hacia el Cielo."}, {"id": "604b26ba70", "source": "Santos que acompañan", "axis": ["confianza"], "text": "Reza, espera y no te preocupes. La preocupación es inútil. Dios es misericordioso y escuchará tu oración. La oración es la mejor arma que tenemos; es la llave al corazón de Dios. Abandonaos plenamente en el Corazón Divino de Cristo, como un niño en los brazos de su madre."}, {"id": "95aab9af08", "source": "Santos que acompañan", "axis": ["confianza", "vulnerabilidad"], "text": "¿Por qué tener miedo, si Cristo es para nosotros el camino, la verdad y la vida? ¿Por qué no fiarse de Dios que es Padre, nuestro Padre? San Rafael se santificó en la aceptación amorosa de los planes de Dios y del misterio de la cruz, en medio de una penosa enfermedad."}, {"id": "a61c7cc796", "source": "Dilexit Nos (Papa Francisco)", "axis": ["kerigma"], "text": "«Nos amó», dice san Pablo refiriéndose a Cristo (Rm 8,37), para ayudarnos a descubrir que de ese amor nada «podrá separarnos» (Rm 8,39). Su corazón abierto nos precede y nos espera sin condiciones, sin exigir un requisito previo para poder amarnos: «nos amó primero» (1 Jn 4,10)."}, {"id": "9890385b5a", "source": "Dilexit Nos (Papa Francisco)", "axis": ["kerigma"], "text": "Ese mismo Jesús hoy espera que le des la posibilidad de iluminar tu existencia, de levantarte, de llenarte con su fuerza: «no los dejaré huérfanos, volveré a ustedes» (Jn 14,18-19). Siempre encuentra alguna manera para manifestarse en tu vida."}, {"id": "e048de7378", "source": "Dilexit Nos (Papa Francisco)", "axis": ["kerigma", "vulnerabilidad"], "text": "Dado que nos cuesta confiar, porque nos lastimaron tantas falsedades, agresiones y desilusiones, él nos susurra al oído: «Ten confianza, hijo» (Mt 9,2). Se trata de superar el miedo y darnos cuenta de que con él no tenemos nada que perder. Podremos dudar de muchas personas, pero no de él."}, {"id": "34ad058751", "source": "Dilexit Nos (Papa Francisco)", "axis": ["kerigma"], "text": "Cuando nos parece que todos nos ignoran, que a nadie le interesa lo que nos pasa, que no tenemos importancia para nadie, él nos está prestando atención: «yo te vi antes que Felipe te llamara, cuando estabas debajo de la higuera» (Jn 1,48)."}, {"id": "1abdc1bb6a", "source": "Dilexit Nos (Papa Francisco)", "axis": ["kerigma"], "text": "«Vengan a mí todos los que están cansados y agobiados, y yo los aliviaré» (Mt 11,28). Nos llama para hacernos entrar allí donde podemos recuperar las fuerzas y la paz: su propio corazón."}, {"id": "f15139ebf1", "source": "Dilexit Nos (Papa Francisco)", "axis": ["kerigma", "vulnerabilidad"], "text": "Su santidad no eliminaba los sentimientos: lloró ante la tumba de Lázaro, se conmovió y se turbó, sintió temor y angustia ante su propia muerte, hasta el grito del Crucificado: «Dios mío, Dios mío, ¿por qué me has abandonado?» (Mc 15,34). No es puro sentimiento: es amor."}, {"id": "f22fd32cf3", "source": "Dilexit Nos (Papa Francisco)", "axis": ["kerigma"], "text": "«Me amó y se entregó por mí» (Ga 2,20). Esa era la mayor convicción de Pablo: saberse amado. La entrega de Cristo en la cruz sólo tenía sentido porque había algo más grande todavía que esa entrega: «me amó»."}, {"id": "76ae665dc0", "source": "Santa Rita, abogada de los imposibles", "axis": ["confianza"], "text": "Oh Santa Rita, abogada de los imposibles, tú que confiaste plenamente en la misericordia de Dios en medio de las pruebas y el sufrimiento, alcánzame la gracia de confiar en Él como tú lo hiciste. Ayúdame a creer que, con Dios, nada es imposible, y que Él siempre tiene un plan de amor para mí."}, {"id": "0ecca7c3d5", "source": "Santa Rita, abogada de los imposibles", "axis": ["confianza", "vulnerabilidad"], "text": "Tras la muerte de su esposo y sus hijos, Rita no se dejó abatir por el dolor, sino que confió en que Dios tenía un plan para ella. Fue rechazada varias veces en el convento por su pasado, pero no perdió la confianza y siguió orando."}, {"id": "78090a3305", "source": "Santa Rita, abogada de los imposibles", "axis": ["confianza"], "text": "La confianza en Dios no depende de las circunstancias externas, sino de la certeza de que Él está presente y actúa en nuestra vida. A través de la oración y la paciencia, podemos superar cualquier dificultad, por imposible que parezca."}, {"id": "1994ad5cb7", "source": "Dios y la libertad del mal", "axis": ["kerigma", "vulnerabilidad"], "text": "Dios no desea el mal, pero permite que exista como consecuencia de la libertad humana. Esto no significa que Él sea indiferente al sufrimiento; al contrario, Él está presente en medio de nuestro dolor. Tu confianza en Dios no se basa en que Él evite todo sufrimiento, sino en que Él camina contigo a través de él."}, {"id": "e2446118ed", "source": "Dios y la libertad del mal", "axis": ["confianza", "kerigma"], "text": "El mal no tiene la última palabra. Dios es más grande que cualquier maldad, y Él puede traer algo bueno incluso de las situaciones más oscuras: “y sabemos que Dios dispone todas las cosas para el bien de quienes lo aman” (Romanos 8:28)."}, {"id": "82daad1b4c", "source": "Dios y la libertad del mal", "axis": ["vulnerabilidad", "kerigma"], "text": "Job perdió todo: su familia, sus posesiones y su salud. Aunque cuestionó a Dios y luchó con su dolor, nunca perdió completamente la fe. Job no recibió respuestas a todas sus preguntas, pero aprendió a confiar en la soberanía y la bondad de Dios."}, {"id": "66f8cb281d", "source": "Dios y la libertad del mal", "axis": ["confianza"], "text": "Señor, sé que no eres el autor del mal, pero estoy herido y confundido. Ayúdame a confiar en ti, incluso cuando no entiendo por qué suceden estas cosas. Dame fuerza para sanar, esperanza para seguir adelante y fe para creer que tú estás conmigo en este dolor."}, {"id": "bf2929d6e4", "source": "Dios y el miedo", "axis": ["confianza", "vulnerabilidad"], "text": "Entrega tus cargas: encomienda a Dios tus heridas y miedos. Puedes pedirle que te ayude a sanar esas experiencias dolorosas de la niñez. Imagina a Dios abrazando a esa versión más joven de ti mismo que experimentó el miedo, y cómo Él te consuela y te da seguridad."}, {"id": "29ffe064a0", "source": "Dios y el miedo", "axis": ["confianza"], "text": "La fe no elimina el miedo, pero te ayuda a caminar a pesar de él. Confía en que Dios está contigo en cada paso. “El Señor es mi luz y mi salvación, ¿de quién temeré?” (Salmo 27:1)."}, {"id": "dc12d9263a", "source": "Dios y el miedo", "axis": ["confianza", "vulnerabilidad"], "text": "Dios no siempre elimina el miedo de inmediato, pero te da la fuerza para enfrentarlo y la paz para superarlo. No hay contradicción entre buscar ayuda psicológica y confiar en Dios: la terapia puede ser una herramienta que Dios usa para sanarte."}], "bible": [{"ref": "Mateo 6, 25-27.31-34", "text": "Por eso os digo: no andéis preocupados por vuestra vida, qué comeréis, ni por vuestro cuerpo, qué vestiréis... Mirad las aves del cielo: no siembran ni siegan ni recogen en graneros, y vuestro Padre celestial las alimenta. ¿No valéis vosotros más que ellas? ... No os preocupéis, pues, diciendo: ¿qué comeremos? ... Buscad primero el Reino de Dios y su justicia, y todo esto se os dará por añadidura. No os preocupéis, pues, por el mañana; el mañana se preocupará de sí mismo. Basta a cada día su propio afán.", "kw": ["confianza", "afan", "preocupacion", "provision", "futuro", "manana", "ansiedad", "miedo", "trabajo", "dinero", "mateo 6"]}, {"ref": "2 Corintios 12, 9-10", "text": "Me ha dicho: «Te basta mi gracia, porque mi fuerza se manifiesta en la debilidad.» Por eso, de buena gana me gloriaré más bien en mis debilidades, para que resida en mí la fuerza de Cristo. Por eso me complazco en las debilidades, en las injurias, en las necesidades, en las persecuciones, en las angustias, sufridas por Cristo; pues cuando soy débil, entonces es cuando soy fuerte.", "kw": ["debilidad", "fuerza", "vulnerabilidad", "gracia", "2 corintios 12", "corintios"]}, {"ref": "Isaías 53, 3-5", "text": "Despreciado y evitado de los hombres, varón de dolores, habituado al sufrimiento... Y sin embargo, eran nuestras dolencias las que él llevaba, nuestros dolores los que soportaba... Él ha sido herido por nuestras rebeldías, molido por nuestras culpas. Él soportó el castigo que nos trae la paz, y con sus heridas hemos sido curados.", "kw": ["dolor", "sufrimiento", "herida", "abuso", "rechazo", "abandono", "curacion", "sanacion", "cruz"]}, {"ref": "Juan 15, 4-5", "text": "Permaneced en mí, como yo en vosotros. Lo mismo que el sarmiento no puede dar fruto por sí, si no permanece en la vid, así tampoco vosotros, si no permanecéis en mí. Yo soy la vid, vosotros los sarmientos. El que permanece en mí y yo en él, ése da mucho fruto; porque separados de mí no podéis hacer nada.", "kw": ["union", "dependencia", "fruto", "permanecer", "solo", "sola", "identidad", "raiz"]}, {"ref": "Romanos 8, 28", "text": "Sabemos, por otra parte, que todo coopera para bien de los que aman a Dios, de los que han sido llamados según su designio.", "kw": ["providencia", "bien", "proposito", "sentido", "porque", "dolor", "confianza"]}, {"ref": "Romanos 8, 38-39", "text": "Estoy seguro de que ni la muerte, ni la vida, ni ángeles, ni principados, ni presente, ni futuro, ni potestades, ni altura, ni profundidad, ni otra criatura alguna podrá separarnos del amor de Dios manifestado en Cristo Jesús, Señor nuestro.", "kw": ["amor", "separacion", "abandono", "seguridad", "kerigma", "cristo jesus", "inseparable"]}, {"ref": "Efesios 2, 8-9", "text": "Porque habéis sido salvados por la gracia mediante la fe; esto no viene de vosotros, sino que es don de Dios; y no proviene de las obras, para que nadie pueda gloriarse.", "kw": ["gracia", "don", "regalo", "gratis", "salvacion", "merito", "obras"]}, {"ref": "Salmo 34, 18", "text": "Cerca está Yahvé de los quebrantados de corazón, él salva a los de espíritu abatido.", "kw": ["quebranto", "tristeza", "depresion", "corazon roto", "cercania", "abatido"]}, {"ref": "Salmo 130, 3-4", "text": "Si llevas cuenta de las culpas, Yahvé, Señor, ¿quién podrá resistir? Pero en ti se halla el perdón, para que seas temido.", "kw": ["perdon", "culpa", "pecado", "juicio", "vergüenza", "vergüenza"]}, {"ref": "Mateo 11, 28-30", "text": "Venid a mí todos los que estáis fatigados y agobiados, y yo os aliviaré. Tomad mi yugo sobre vosotros y aprended de mí, que soy manso y humilde de corazón, y hallaréis descanso para vuestras almas. Porque mi yugo es suave y mi carga ligera.", "kw": ["descanso", "cansancio", "carga", "agobio", "peso", "ansiedad", "cansado"]}, {"ref": "1 Juan 4, 18", "text": "En el amor no hay temor, antes el amor perfecto echa fuera el temor, porque el temor supone castigo, y quien teme no ha llegado a la plenitud del amor.", "kw": ["miedo", "temor", "amor", "castigo", "confianza"]}, {"ref": "Filipenses 4, 6-7", "text": "No os inquietéis por cosa alguna; antes bien, en toda ocasión, presentad a Dios vuestras peticiones, mediante la oración y la súplica, en acción de gracias. Y la paz de Dios, que sobrepasa todo juicio, custodiará vuestros corazones y vuestros pensamientos en Cristo Jesús.", "kw": ["ansiedad", "inquietud", "paz", "oracion", "afan"]}, {"ref": "Hebreos 4, 15-16", "text": "No tenemos un Sumo Sacerdote incapaz de compadecerse de nuestras flaquezas, sino probado en todo igual que nosotros, excepto en el pecado. Acerquémonos, pues, confiadamente al trono de la gracia, para alcanzar misericordia y hallar gracia que nos ayude oportunamente.", "kw": ["debilidad", "compasion", "comprension", "gracia", "flaqueza", "sacerdote"]}, {"ref": "Juan 3, 16", "text": "Tanto amó Dios al mundo, que le dio a su Hijo único, para que todo el que crea en él no perezca, sino que tenga vida eterna.", "kw": ["amor", "kerigma", "entrega", "hijo", "vida eterna"]}, {"ref": "Romanos 5, 8", "text": "Mas la prueba de que Dios nos ama es que Cristo murió por nosotros cuando todavía éramos pecadores.", "kw": ["amor", "pecado", "kerigma", "gracia", "merito"]}, {"ref": "2 Corintios 5, 17", "text": "Por tanto, el que está en Cristo, es una nueva creación; pasó lo viejo, todo es nuevo.", "kw": ["nueva vida", "cambio", "conversion", "identidad", "renovacion"]}, {"ref": "Isaías 41, 10", "text": "No temas, porque yo estoy contigo; no te turbes, porque yo soy tu Dios; yo te fortalezco, te ayudo y te sostengo con la diestra victoriosa.", "kw": ["miedo", "temor", "fortaleza", "ayuda", "sostener"]}, {"ref": "Salmo 27, 10", "text": "Aunque mi padre y mi madre me abandonaran, Yahvé me acogería.", "kw": ["padre", "madre", "abandono", "familia", "orfandad", "rechazo"]}, {"ref": "Juan 14, 27", "text": "La paz os dejo, mi paz os doy; no os la doy como la da el mundo. Que no tiemble vuestro corazón ni se acobarde.", "kw": ["paz", "miedo", "corazon", "tranquilidad"]}, {"ref": "Mateo 28, 20", "text": "Y sabed que yo estoy con vosotros todos los días hasta el fin del mundo.", "kw": ["compañia", "soledad", "solo", "sola", "presencia", "acompañamiento"]}, {"ref": "Lucas 15, 20", "text": "Cuando todavía estaba lejos, su padre le vio y se conmovió; y echando a correr, se le echó al cuello y le cubrió de besos.", "kw": ["padre", "perdon", "hijo prodigo", "regreso", "reconciliacion", "familia"]}, {"ref": "Salmo 23, 4", "text": "Aunque camine por cañada oscura, ningún mal temeré, porque tú vas conmigo; tu vara y tu cayado me sosiegan.", "kw": ["valle de sombra", "muerte", "miedo", "dolor", "acompañamiento", "enfermedad"]}, {"ref": "Mateo 5, 4", "text": "Bienaventurados los que lloran, porque ellos serán consolados.", "kw": ["llanto", "tristeza", "dolor", "consuelo", "luto"]}, {"ref": "Romanos 12, 21", "text": "No te dejes vencer por el mal; antes bien, vence al mal con el bien.", "kw": ["mal", "venganza", "perdon", "resistir", "no resistir"]}, {"ref": "1 Pedro 5, 7", "text": "Descargad en él vuestras preocupaciones, porque él cuida de vosotros.", "kw": ["ansiedad", "preocupacion", "carga", "cuidado", "confianza"]}, {"ref": "Salmo 139, 13-14", "text": "Tú has formado mis entrañas, me has tejido en el seno materno. Te doy gracias por tantas maravillas: prodigio soy, prodigios son tus obras.", "kw": ["identidad", "valor", "creacion", "dignidad", "vientre materno", "deseado"]}, {"ref": "Jeremías 1, 5", "text": "Antes de formarte en el seno materno, yo te conocía; antes de que nacieras, te tenía consagrado.", "kw": ["identidad", "deseado", "elegido", "vientre materno", "valor"]}, {"ref": "Efesios 1, 5", "text": "Por su amor nos ha predestinado a ser sus hijos adoptivos por medio de Jesucristo, según el beneplácito de su voluntad.", "kw": ["hijo", "adopcion", "familia", "pertenencia", "identidad"]}, {"ref": "Juan 8, 36", "text": "Si el Hijo os da la libertad, seréis realmente libres.", "kw": ["libertad", "esclavitud", "liberacion"]}, {"ref": "Colosenses 1, 13-14", "text": "Él nos ha arrancado del poder de las tinieblas y nos ha trasladado al Reino de su Hijo querido, en quien tenemos la redención, el perdón de los pecados.", "kw": ["rescate", "redencion", "liberacion", "tinieblas", "perdon"]}, {"ref": "Salmo 46, 1", "text": "Dios es refugio y fortaleza, ayuda siempre pronta en las angustias.", "kw": ["refugio", "fortaleza", "angustia", "ayuda", "seguridad"]}, {"ref": "Romanos 5, 3-5", "text": "Nos gloriamos también en las tribulaciones, sabiendo que la tribulación engendra la constancia, la constancia una virtud probada, y la virtud probada la esperanza. Y la esperanza no defrauda, porque el amor de Dios ha sido derramado en nuestros corazones por el Espíritu Santo que nos ha sido dado.", "kw": ["tribulacion", "sufrimiento", "esperanza", "paciencia", "crecimiento"]}, {"ref": "Génesis 3, 4-6", "text": "Replicó la serpiente a la mujer: «No, no moriréis... sino que sabe Dios que el día que comáis de él se os abrirán los ojos y seréis como Dios.» ... Y comió; y dio también a su marido, que comió como ella.", "kw": ["tentacion", "mentira", "engaño", "pecado original", "demonio"]}, {"ref": "Mateo 5, 39", "text": "Yo os digo que no hagáis frente al que os agravia; al contrario, si uno te abofetea en la mejilla derecha, preséntale también la otra.", "kw": ["no resistir al mal", "perdon", "venganza", "agravio", "mal"]}, {"ref": "Marcos 10, 27", "text": "Fijando en ellos la mirada, dice Jesús: «Para los hombres es imposible, mas no para Dios; porque todo es posible para Dios.»", "kw": ["imposible", "incapacidad", "impotencia", "confianza", "fe"]}, {"ref": "Filipenses 1, 6", "text": "Estoy convencido de que aquel que comenzó en vosotros la buena obra, la irá perfeccionando hasta el día de Cristo Jesús.", "kw": ["proceso", "sanacion", "tiempo", "crecimiento", "confianza"]}, {"ref": "Lamentaciones 3, 22-23", "text": "Los favores de Yahvé no se acaban, no se agota su ternura; cada mañana se renuevan: ¡grande es tu fidelidad!", "kw": ["fidelidad", "ternura", "cada mañana", "nuevo dia", "esperanza"]}], "kerigma_core": [{"id": "k1", "text": "Dios se ha hecho hombre en Cristo por los hombres, y ha ofrecido su muerte por nuestra muerte: esta es la noticia de la que me va la vida.", "kw": ["dios", "cristo", "hombre", "muerte", "noticia"]}, {"id": "k2", "text": "Jesús no bajó de la cruz. Tenemos un Dios que no se baja de la cruz, sino que se clava contigo y con tu sufrimiento; bajó al infierno para acariciarme.", "kw": ["cruz", "sufrimiento", "dolor", "infierno", "abandono"]}, {"id": "k3", "text": "Dios te ama ahora, sin ninguna condición, con toda tu debilidad y vulnerabilidad, con tus miedos, tus heridas y tus fracasos.", "kw": ["amor", "condicion", "debilidad", "vulnerabilidad", "herida", "fracaso"]}, {"id": "k4", "text": "El Kerigma tiene la fuerza de romper desde dentro, por medio del Espíritu Santo, las barreras interiores: donde hay muerte, se da la vida.", "kw": ["kerigma", "espiritu", "vida", "muerte", "interior"]}, {"id": "k5", "text": "Cristo ha dado la vida por ti no por ser bueno, sino por ser pecador: esa es la prueba más grande del amor.", "kw": ["pecado", "amor", "prueba", "merito", "gratis"]}, {"id": "k6", "text": "La muerte no tiene la última palabra. Mi fe me sostiene y aunque aún siento temor, sé que no me derribará.", "kw": ["muerte", "ultima palabra", "fe", "temor", "esperanza"]}, {"id": "k7", "text": "Este es mi hijo amado, escuchadle. Ese amor que Dios te tiene no depende de lo que hagas: te ama, y me ama, así.", "kw": ["hijo", "amado", "identidad", "amor incondicional"]}, {"id": "k8", "text": "Nos amó primero, sin exigir ningún requisito previo: su corazón abierto nos precede y nos espera sin condiciones.", "kw": ["amor", "primero", "condicion", "corazon", "espera"]}, {"id": "k9", "text": "Ten confianza, hijo. Con Él no tenemos nada que perder: podremos dudar de muchas personas, pero no de Él.", "kw": ["confianza", "hijo", "duda", "perder"]}, {"id": "k10", "text": "Venid a mí todos los que estáis cansados y agobiados, y yo os haré descansar: nos llama para entrar en su propio corazón.", "kw": ["descanso", "cansancio", "carga", "corazon"]}, {"id": "k11", "text": "Cristo murió por ti, no por ti bueno, sino por ti pecador, mentiroso, falso: esa es la prueba más grande del amor, dar la vida por quien no vale.", "kw": ["pecador", "amor", "prueba", "gratis", "merito"]}, {"id": "k12", "text": "Me amó y se entregó por mí: esa es la mayor certeza de la vida, saberse amado, aunque no se entienda del todo.", "kw": ["amado", "entrega", "certeza", "gracia"]}, {"id": "k13", "text": "Dios está deseando entrar dentro de ti, ser uno contigo, sin que tengas que cambiar antes para merecerlo: te ama ya, tal como estás.", "kw": ["dios", "entrar", "identidad", "merecer", "ya"]}, {"id": "k14", "text": "Aunque sufrió hasta ser abandonado por el mismo Dios, dijo: «Padre, perdónalos». Ese amor no te va a condenar por lo que hagas o hayas hecho.", "kw": ["perdon", "abandono", "condenar", "cruz"]}]};
+const REFLECTIONS = PAYLOAD.reflections;
+const BIBLE = PAYLOAD.bible;
+const KERIGMA_CORE = PAYLOAD.kerigma_core;
+const DEFAULT_KERIGMA = KERIGMA_CORE.find(k=>k.id==='k3') || KERIGMA_CORE[0];
+const FALLBACK_BIBLE_IDS = ["Juan 3, 16","Isaías 53, 3-5","Romanos 8, 38-39"];
+
+// ==================== DIARIO EMOCIONAL ====================
+const EMOTIONS = [
+  {label:"Miedo", grp:"v"}, {label:"Abandono", grp:"v"}, {label:"Incertidumbre", grp:"v"}, {label:"Rechazo", grp:"v"},
+  {label:"Resistencia", grp:"v"}, {label:"Desprotección", grp:"v"}, {label:"Culpa", grp:"v"}, {label:"Vergüenza", grp:"v"},
+  {label:"Confianza", grp:"c"}, {label:"Calma", grp:"c"}, {label:"Seguridad", grp:"c"}, {label:"Paz", grp:"c"},
+  {label:"Esperanza", grp:"k"}, {label:"Consuelo", grp:"k"}, {label:"Gratitud", grp:"k"}, {label:"Alegría", grp:"k"}
+];
+const GRP_COLOR = {v:"#9c3f3a", c:"#2c5f66", k:"#b9822f"};
+const GRP_COLOR_L = {v:"#c46a58", c:"#4f8f96", k:"#e0aa5a"};
+
+let selectedEmotions = new Set();
+let diaryEntries = [];
+let editingId = null;
+let expandedMonths = new Set();
+let expandedMonthsInitialized = false;
+
+function polarPoint(cx, cy, rad, angDeg){
+  const a = angDeg * Math.PI / 180;
+  return [cx + rad * Math.cos(a), cy + rad * Math.sin(a)];
+}
+
+function buildEmotionWheel(){
+  const svg = document.getElementById('emotionWheel');
+  const cx = 200, cy = 200, R = 190, r = 90;
+  const n = EMOTIONS.length;
+  const step = 360 / n;
+  let html = `<circle cx="${cx}" cy="${cy}" r="${R+2}" fill="#140f09"/>`;
+
+  EMOTIONS.forEach((e, i) => {
+    const a0 = -90 + i * step;
+    const a1 = a0 + step;
+    const [x1,y1] = polarPoint(cx,cy,R,a0);
+    const [x2,y2] = polarPoint(cx,cy,R,a1);
+    const [x3,y3] = polarPoint(cx,cy,r,a1);
+    const [x4,y4] = polarPoint(cx,cy,r,a0);
+    const d = `M ${x1.toFixed(2)} ${y1.toFixed(2)} A ${R} ${R} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)} L ${x3.toFixed(2)} ${y3.toFixed(2)} A ${r} ${r} 0 0 0 ${x4.toFixed(2)} ${y4.toFixed(2)} Z`;
+    html += `<path d="${d}" fill="${GRP_COLOR[e.grp]}" fill-opacity="0.85" stroke="#140f09" stroke-width="1.5" data-emotion="${escapeHtml(e.label)}" data-grp="${e.grp}"/>`;
+
+    const mid = (a0 + a1) / 2;
+    const [lx,ly] = polarPoint(cx,cy,r+8,mid);
+    const flip = (((mid % 360) + 360) % 360) > 90 && (((mid % 360) + 360) % 360) < 270;
+    const rot = mid + (flip ? 180 : 0);
+    const anchor = flip ? 'end' : 'start';
+    html += `<text x="${lx.toFixed(2)}" y="${ly.toFixed(2)}" transform="rotate(${rot.toFixed(2)} ${lx.toFixed(2)} ${ly.toFixed(2)})" text-anchor="${anchor}" dominant-baseline="middle" font-size="11.5" fill="#fbf6ea" style="pointer-events:none;">${escapeHtml(e.label)}</text>`;
+  });
+
+  html += `<circle cx="${cx}" cy="${cy}" r="${r-4}" fill="#1c150d" stroke="#e0aa5a" stroke-width="1.5"/>`;
+  svg.innerHTML = html;
+
+  svg.querySelectorAll('path[data-emotion]').forEach(path => {
+    path.addEventListener('click', () => toggleEmotion(path.dataset.emotion, path));
+  });
+}
+
+function toggleEmotion(label, pathEl){
+  if(selectedEmotions.has(label)){
+    selectedEmotions.delete(label);
+    if(pathEl) pathEl.classList.remove('selected');
+  } else {
+    selectedEmotions.add(label);
+    if(pathEl) pathEl.classList.add('selected');
+  }
+  renderSelectedChips();
+}
+
+function renderSelectedChips(){
+  const wrap = document.getElementById('selectedChips');
+  const count = document.getElementById('wheelCount');
+  count.textContent = selectedEmotions.size;
+  wrap.innerHTML = Array.from(selectedEmotions).map(label => {
+    const e = EMOTIONS.find(x => x.label === label);
+    const color = e ? GRP_COLOR_L[e.grp] : '#888';
+    return `<span class="emo-chip" style="background:${color}">${escapeHtml(label)}<button data-remove="${escapeHtml(label)}" aria-label="Quitar">×</button></span>`;
+  }).join('');
+  wrap.querySelectorAll('button[data-remove]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const label = btn.dataset.remove;
+      const pathEl = document.querySelector(`path[data-emotion="${CSS.escape(label)}"]`);
+      toggleEmotion(label, pathEl);
+    });
+  });
+}
+
+function fmtDate(iso){
+  try{
+    const [y,m,d] = iso.split('-').map(Number);
+    const dt = new Date(y, m-1, d);
+    return dt.toLocaleDateString('es-ES', {day:'numeric', month:'long', year:'numeric'});
+  } catch(e){ return iso; }
+}
+
+function resetDiaryForm(){
+  document.getElementById('diaryText').value = '';
+  document.getElementById('diaryDate').value = new Date().toISOString().slice(0,10);
+  selectedEmotions.clear();
+  document.querySelectorAll('.wheel-wrap path.selected').forEach(p => p.classList.remove('selected'));
+  renderSelectedChips();
+}
+
+function setEditingMode(on){
+  editingId = on ? editingId : null;
+  document.getElementById('saveDiaryBtn').textContent = on ? 'Actualizar entrada' : 'Guardar en el diario';
+  document.getElementById('cancelEditBtn').style.display = on ? 'inline-block' : 'none';
+  document.getElementById('editingNote').style.display = on ? 'block' : 'none';
+}
+
+function startEditEntry(id){
+  const entry = diaryEntries.find(e => e.id === id);
+  if(!entry) return;
+  editingId = id;
+  document.getElementById('diaryText').value = entry.text || '';
+  document.getElementById('diaryDate').value = entry.date;
+  selectedEmotions = new Set(entry.emotions || []);
+  document.querySelectorAll('.wheel-wrap path.selected').forEach(p => p.classList.remove('selected'));
+  document.querySelectorAll('.wheel-wrap path[data-emotion]').forEach(p => {
+    if(selectedEmotions.has(p.dataset.emotion)) p.classList.add('selected');
+  });
+  renderSelectedChips();
+  setEditingMode(true);
+  const block = document.querySelector('.diary-block');
+  if(block && typeof block.scrollIntoView === 'function'){
+    block.scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+
+function cancelEdit(){
+  setEditingMode(false);
+  resetDiaryForm();
+  document.getElementById('diaryLoadNote').textContent = 'Edición cancelada.';
+}
+
+function saveDiaryEntry(){
+  const text = document.getElementById('diaryText').value.trim();
+  const date = document.getElementById('diaryDate').value || new Date().toISOString().slice(0,10);
+  if(!text && selectedEmotions.size === 0){
+    document.getElementById('diaryLoadNote').textContent = 'Elige al menos una emoción o escribe algo antes de guardar.';
+    return;
+  }
+
+  if(editingId){
+    const entry = diaryEntries.find(e => e.id === editingId);
+    if(entry){
+      entry.date = date;
+      entry.emotions = Array.from(selectedEmotions);
+      entry.text = text;
+    }
+    setEditingMode(false);
+    document.getElementById('diaryLoadNote').textContent = 'Entrada actualizada.';
+    expandedMonths.add(monthKey(date));
+  } else {
+    const entry = {
+      id: 'd' + Date.now() + Math.floor(Math.random()*1000),
+      date,
+      emotions: Array.from(selectedEmotions),
+      text
+    };
+    diaryEntries.push(entry);
+    document.getElementById('diaryLoadNote').textContent = 'Guardado en Reflexiones diario. No olvides exportarlo de vez en cuando para no perderlo.';
+    expandedMonths.add(monthKey(date));
+  }
+
+  const reflBody = document.getElementById('reflectionsBody');
+  const reflToggle = document.getElementById('toggleReflections');
+  if(reflBody && reflBody.style.display === 'none'){
+    reflBody.style.display = 'block';
+    reflToggle.classList.add('open');
+  }
+
+  persistDiaryLocal();
+  resetDiaryForm();
+  renderDiaryTimeline();
+}
+
+function deleteDiaryEntry(id){
+  diaryEntries = diaryEntries.filter(e => e.id !== id);
+  persistDiaryLocal();
+  if(editingId === id){ setEditingMode(false); resetDiaryForm(); }
+  renderDiaryTimeline();
+}
+
+function monthKey(iso){ return iso.slice(0,7); } // "2026-08"
+
+function monthLabel(key){
+  const [y,m] = key.split('-').map(Number);
+  const dt = new Date(y, m-1, 1);
+  const label = dt.toLocaleDateString('es-ES', {month:'long', year:'numeric'});
+  return label.charAt(0).toUpperCase() + label.slice(1);
+}
+
+function matchesDiaryFilter(entry, filter){
+  if(!filter) return true;
+  const nf = stripAccents(filter.toLowerCase());
+  const haystack = stripAccents((entry.text + ' ' + entry.emotions.join(' ') + ' ' + fmtDate(entry.date)).toLowerCase());
+  return haystack.includes(nf);
+}
+
+function renderDiaryTimeline(){
+  const el = document.getElementById('diaryTimeline');
+  const countLabel = document.getElementById('reflectionsCountLabel');
+  countLabel.textContent = diaryEntries.length + (diaryEntries.length === 1 ? ' entrada' : ' entradas');
+
+  const filterVal = (document.getElementById('diaryFilter') || {}).value || '';
+  const filtered = diaryEntries.filter(e => matchesDiaryFilter(e, filterVal));
+
+  if(!diaryEntries.length){
+    el.innerHTML = '<div class="diary-empty">Todavía no hay entradas. Toca la rueda y cuenta cómo estás — quedará aquí, ordenado por fecha.</div>';
+    return;
+  }
+  if(!filtered.length){
+    el.innerHTML = '<div class="diary-empty">Ninguna reflexión coincide con esa búsqueda.</div>';
+    return;
+  }
+
+  // Agrupar por mes (año-mes), meses más recientes primero
+  const groups = new Map();
+  filtered.forEach(e => {
+    const key = monthKey(e.date);
+    if(!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(e);
+  });
+  const monthKeys = Array.from(groups.keys()).sort((a,b) => (a < b ? 1 : -1));
+
+  // Si hay un filtro activo, mostramos directamente los meses con coincidencias,
+  // sin alterar qué meses tenía el usuario abiertos de forma permanente
+  const filtering = !!filterVal.trim();
+  if(!filtering && !expandedMonthsInitialized && monthKeys.length){
+    expandedMonths.add(monthKeys[0]);
+  }
+  expandedMonthsInitialized = true;
+
+  el.innerHTML = monthKeys.map(key => {
+    const entries = groups.get(key).sort((a,b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : (a.id < b.id ? 1 : -1)));
+    const isOpen = filtering ? true : expandedMonths.has(key);
+    const cardsHtml = entries.map(entry => {
+      const chips = entry.emotions.map(label => {
+        const e = EMOTIONS.find(x => x.label === label);
+        const color = e ? GRP_COLOR[e.grp] : '#888';
+        return `<span class="diary-entry-chip" style="background:${color}">${escapeHtml(label)}</span>`;
+      }).join('');
+      return `<div class="diary-entry">
+        <div class="diary-entry-head">
+          <span class="diary-entry-date">${escapeHtml(fmtDate(entry.date))}</span>
+          <div class="diary-entry-actions">
+            <button class="diary-entry-edit" data-edit="${entry.id}" aria-label="Editar">✎</button>
+            <button class="diary-entry-del" data-del="${entry.id}" aria-label="Borrar">🗑</button>
+          </div>
+        </div>
+        ${chips ? `<div class="diary-entry-chips">${chips}</div>` : ''}
+        ${entry.text ? `<div class="diary-entry-text">${escapeHtml(entry.text)}</div>` : ''}
+      </div>`;
+    }).join('');
+
+    return `<div class="month-group">
+      <div class="month-head ${isOpen ? 'open' : ''}" data-month="${key}">
+        <span><span class="m-label">${escapeHtml(monthLabel(key))}</span><span class="m-count">(${entries.length})</span></span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      ${isOpen ? `<div class="month-entries">${cardsHtml}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  el.querySelectorAll('.month-head').forEach(head => {
+    head.addEventListener('click', () => {
+      const key = head.dataset.month;
+      if(expandedMonths.has(key)) expandedMonths.delete(key); else expandedMonths.add(key);
+      renderDiaryTimeline();
+    });
+  });
+  el.querySelectorAll('button[data-del]').forEach(btn => {
+    btn.addEventListener('click', (ev) => { ev.stopPropagation(); deleteDiaryEntry(btn.dataset.del); });
+  });
+  el.querySelectorAll('button[data-edit]').forEach(btn => {
+    btn.addEventListener('click', (ev) => { ev.stopPropagation(); startEditEntry(btn.dataset.edit); });
+  });
+}
+
+function persistDiaryLocal(){
+  try{ localStorage.setItem('miCaminoDiario', JSON.stringify(diaryEntries)); } catch(e){}
+}
+
+function mergeEntries(base, extra){
+  const map = new Map(base.map(e => [e.id, e]));
+  extra.forEach(e => { if(!map.has(e.id)) map.set(e.id, e); });
+  return Array.from(map.values());
+}
+
+async function loadDiary(){
+  let fromFile = [];
+  let fromLocal = [];
+  try{
+    const res = await fetch('diario.json', {cache:'no-store'});
+    if(res.ok){ fromFile = await res.json(); }
+  } catch(e){ /* no accesible (archivo local o CORS): seguimos solo con localStorage */ }
+  try{
+    const raw = localStorage.getItem('miCaminoDiario');
+    if(raw) fromLocal = JSON.parse(raw);
+  } catch(e){ /* localStorage no disponible */ }
+
+  diaryEntries = mergeEntries(Array.isArray(fromFile) ? fromFile : [], Array.isArray(fromLocal) ? fromLocal : []);
+
+  const note = document.getElementById('diaryLoadNote');
+  if(fromFile.length){
+    note.textContent = `Cargadas ${fromFile.length} entrada(s) desde diario.json.`;
+  } else if(fromLocal.length){
+    note.textContent = `Cargadas ${fromLocal.length} entrada(s) guardadas en este navegador.`;
+  }
+  renderDiaryTimeline();
+}
+
+function downloadBlob(content, filename, mime){
+  const blob = new Blob([content], {type: mime});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = filename;
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { document.body.removeChild(a); URL.revokeObjectURL(url); }, 300);
+}
+
+function exportDiaryJson(){
+  if(!diaryEntries.length){
+    document.getElementById('diaryLoadNote').textContent = 'Aún no hay nada que exportar.';
+    return;
+  }
+  const sorted = diaryEntries.slice().sort((a,b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  downloadBlob(JSON.stringify(sorted, null, 2), 'diario.json', 'application/json');
+  document.getElementById('diaryLoadNote').textContent = 'diario.json descargado — súbelo a GitHub junto al html para conservarlo.';
+}
+
+function exportDiaryWord(){
+  if(!diaryEntries.length){
+    document.getElementById('diaryLoadNote').textContent = 'Aún no hay nada que exportar.';
+    return;
+  }
+  const sorted = diaryEntries.slice().sort((a,b) => (a.date < b.date ? -1 : a.date > b.date ? 1 : 0));
+  let body = `<h1 style="font-family:Georgia,serif;">Mi diario emocional</h1>`;
+  body += `<p style="font-family:Georgia,serif;font-style:italic;color:#555;">Kerigma, Confianza y Debilidad hecha fuerza</p><hr>`;
+  sorted.forEach(entry => {
+    body += `<h3 style="font-family:Georgia,serif;color:#8a6a2f;">${escapeHtml(fmtDate(entry.date))}</h3>`;
+    if(entry.emotions.length){
+      body += `<p style="font-family:Arial,sans-serif;font-size:11pt;"><b>Emociones:</b> ${entry.emotions.map(escapeHtml).join(', ')}</p>`;
+    }
+    if(entry.text){
+      body += `<p style="font-family:Georgia,serif;font-size:12pt;line-height:1.5;">${escapeHtml(entry.text).replace(/\n/g,'<br>')}</p>`;
+    }
+    body += `<hr>`;
+  });
+  const doc = `<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40">
+<head><meta charset="utf-8"><title>Mi diario emocional</title></head>
+<body>${body}</body></html>`;
+  downloadBlob(doc, 'diario.doc', 'application/msword');
+  document.getElementById('diaryLoadNote').textContent = 'Documento Word descargado.';
+}
+
+document.getElementById('saveDiaryBtn').addEventListener('click', saveDiaryEntry);
+document.getElementById('cancelEditBtn').addEventListener('click', cancelEdit);
+
+const toggleReflectionsBtn = document.getElementById('toggleReflections');
+const reflectionsBody = document.getElementById('reflectionsBody');
+toggleReflectionsBtn.addEventListener('click', () => {
+  const open = reflectionsBody.style.display !== 'none';
+  reflectionsBody.style.display = open ? 'none' : 'block';
+  toggleReflectionsBtn.classList.toggle('open', !open);
+});
+document.getElementById('diaryFilter').addEventListener('input', renderDiaryTimeline);
+document.getElementById('exportJsonBtn').addEventListener('click', exportDiaryJson);
+document.getElementById('exportWordBtn').addEventListener('click', exportDiaryWord);
+document.getElementById('refreshGithubBtn').addEventListener('click', async () => {
+  const note = document.getElementById('diaryLoadNote');
+  note.textContent = 'Buscando diario.json actualizado…';
+  await loadDiary();
+});
+document.getElementById('diaryDate').value = new Date().toISOString().slice(0,10);
+
+buildEmotionWheel();
+loadDiary();
+
+const resultsEl = document.getElementById('results');
+const qEl = document.getElementById('q');
+const clearBtn = document.getElementById('clearBtn');
+const goBtn = document.getElementById('goBtn');
+const metaRow = document.getElementById('metaRow');
+const chips = document.querySelectorAll('.chip');
+
+let activeAxes = new Set();
+
+function stripAccents(s){ return s.normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+
+function buildRegex(term){
+  const map = {a:'[aáàä]', e:'[eéèë]', i:'[iíìï]', o:'[oóòö]', u:'[uúùü]', n:'[nñ]'};
+  const escaped = term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  let pattern = '';
+  for(const ch of escaped){ const low = ch.toLowerCase(); pattern += map[low] || ch; }
+  return new RegExp(pattern, 'gi');
+}
+
+function highlight(text, terms){
+  if(!terms.length) return escapeHtml(text);
+  const spans = [];
+  terms.forEach(t => {
+    if(!t) return;
+    const re = buildRegex(t);
+    let m;
+    while((m = re.exec(text)) !== null){
+      spans.push([m.index, m.index + m[0].length]);
+      if(m.index === re.lastIndex) re.lastIndex++;
+    }
+  });
+  if(!spans.length) return escapeHtml(text);
+  spans.sort((a,b)=>a[0]-b[0]);
+  const merged = [];
+  for(const s of spans){
+    if(merged.length && s[0] <= merged[merged.length-1][1]){
+      merged[merged.length-1][1] = Math.max(merged[merged.length-1][1], s[1]);
+    } else { merged.push(s.slice()); }
+  }
+  let out = '', last = 0;
+  for(const [start,end] of merged){
+    out += escapeHtml(text.slice(last,start));
+    out += '<mark>' + escapeHtml(text.slice(start,end)) + '</mark>';
+    last = end;
+  }
+  out += escapeHtml(text.slice(last));
+  return out;
+}
+
+function escapeHtml(s){
+  return s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function axisLabel(a){ return {kerigma:'Kerigma', confianza:'Confianza', vulnerabilidad:'Vulnerabilidad'}[a] || a; }
+
+function tokenize(s){
+  return (stripAccents(s.toLowerCase()).match(/[a-z0-9]+/g)) || [];
+}
+
+function termMatchesToken(term, token){
+  if(term.length <= 3) return token === term;
+  const prefix = term.slice(0, Math.min(5, term.length));
+  return token.startsWith(prefix) || term.startsWith(token.slice(0, Math.min(5, token.length)));
+}
+
+function scoreTokens(tokens, terms){
+  let s = 0;
+  for(const t of terms){
+    const nt = stripAccents(t.toLowerCase()).replace(/[^a-z0-9]/g,'');
+    if(!nt) continue;
+    let count = 0;
+    for(const w of tokens){ if(termMatchesToken(nt, w)) count++; }
+    if(count === 0) return -1;
+    s += count;
+  }
+  return s;
+}
+
+function hashStr(s){
+  let h = 0;
+  for(let i=0;i<s.length;i++){ h = (h*31 + s.charCodeAt(i)) >>> 0; }
+  return h;
+}
+
+// Pre-calcular tokens de cada fuente para búsquedas rápidas y consistentes
+KERIGMA_CORE.forEach(k => { k._tok = tokenize(k.text + ' ' + k.kw.join(' ')); });
+BIBLE.forEach(b => { b._tok = tokenize(b.text + ' ' + b.ref + ' ' + b.kw.join(' ')); });
+REFLECTIONS.forEach(e => { e._tok = tokenize(e.text); });
+
+function pickKerigmas(terms, raw){
+  const scored = KERIGMA_CORE.map(k => ({k, s: scoreTokens(k._tok, terms)}))
+    .filter(x => x.s > 0).sort((a,b)=>b.s-a.s);
+
+  if(scored.length >= 3) return scored.slice(0,3).map(x=>x.k);
+
+  const n = KERIGMA_CORE.length;
+  const seed = raw ? hashStr(stripAccents(raw.toLowerCase())) : Math.floor(Math.random()*100000);
+  const picked = scored.map(x=>x.k);
+  const usedIdx = new Set(picked.map(k => KERIGMA_CORE.indexOf(k)));
+  let offset = 0;
+  while(picked.length < 3 && usedIdx.size < n){
+    const idx = (seed + offset * 7 + offset) % n;
+    if(!usedIdx.has(idx)){
+      usedIdx.add(idx);
+      picked.push(KERIGMA_CORE[idx]);
+    }
+    offset++;
+  }
+  return picked;
+}
+
+function searchBible(terms, limit, raw){
+  limit = limit || 3;
+  const scored = BIBLE.map(b => ({b, s: scoreTokens(b._tok, terms)}))
+    .filter(x => x.s >= 0).sort((a,b)=>b.s-a.s);
+  if(scored.length) return scored.slice(0,limit).map(x=>x.b);
+
+  // Sin coincidencia: rotamos el fallback según la palabra buscada, no siempre el mismo
+  const n = BIBLE.length;
+  const seed = raw ? hashStr(stripAccents(raw.toLowerCase())) + 17 : Math.floor(Math.random()*100000);
+  const picked = [];
+  const used = new Set();
+  let offset = 0;
+  while(picked.length < limit && used.size < n){
+    const idx = (seed + offset * 11 + offset) % n;
+    if(!used.has(idx)){ used.add(idx); picked.push(BIBLE[idx]); }
+    offset++;
+  }
+  return picked;
+}
+
+function searchReflections(terms){
+  let pool = REFLECTIONS;
+  if(activeAxes.size) pool = pool.filter(e => e.axis.some(a => activeAxes.has(a)));
+  const scored = pool.map(e => ({e, s: scoreTokens(e._tok, terms)}))
+    .filter(x => x.s >= 0).sort((a,b)=>b.s-a.s);
+  return scored.slice(0,6).map(x=>x.e);
+}
+
+function browseReflections(){
+  let pool = REFLECTIONS;
+  if(activeAxes.size) pool = pool.filter(e => e.axis.some(a => activeAxes.has(a)));
+  return pool.slice(0,10);
+}
+
+function sectionLabel(kind, text){
+  const icons = {
+    kerigma: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 C12 2 6 9 6 14a6 6 0 0 0 12 0c0-5-6-12-6-12z"/></svg>',
+    bible: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
+    mine: '<svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6c-1.8-1.8-4.8-1.8-6.6 0L12 6.8l-2.2-2.2c-1.8-1.8-4.8-1.8-6.6 0-1.8 1.8-1.8 4.8 0 6.6L12 20l8.8-8.8c1.8-1.8 1.8-4.8 0-6.6z"/></svg>'
+  };
+  return `<div class="section-label ${kind}">${icons[kind]}<span>${text}</span></div>`;
+}
+
+function render(){
+  const raw = qEl.value.trim();
+  clearBtn.classList.toggle('show', raw.length > 0);
+  const terms = raw ? raw.split(/\s+/).filter(Boolean) : [];
+
+  // -------- Kerigma: SIEMPRE presente, rotando entre varias frases --------
+  const kerigmas = pickKerigmas(terms, raw);
+  let html = sectionLabel('kerigma','Kerigma · lo que nunca cambia');
+  html += kerigmas.map(k => `<div class="kerigma-box"><p>${escapeHtml(k.text)}</p></div>`).join('');
+
+  // -------- Biblia: contexto --------
+  const bibleMatches = searchBible(terms, 3, raw);
+  html += sectionLabel('bible','La Palabra · contexto');
+  html += bibleMatches.map(b => `<div class="bible-card">
+      <div class="bible-ref">${escapeHtml(b.ref)}</div>
+      <div class="bible-text">${highlight(b.text, terms)}</div>
+    </div>`).join('');
+
+  // -------- Mi historia / otras voces --------
+  const mine = raw ? searchReflections(terms) : browseReflections();
+  html += sectionLabel('mine', raw ? 'Mi historia y las voces que me han acompañado' : (activeAxes.size ? 'Explorando este eje' : 'Algunos fragmentos para empezar'));
+  if(mine.length){
+    html += mine.map(e => cardHtml(e, terms)).join('');
+  } else if(raw) {
+    html += `<div class="empty-mine">Todavía no tengo un párrafo tuyo con esa palabra exacta — pero ahí arriba tienes el Kerigma y la Palabra, que siempre sostienen. Sigue subiendo escritos y este hueco se irá llenando.</div>`;
+  }
+
+  resultsEl.innerHTML = html;
+
+  if(raw){
+    metaRow.textContent = bibleMatches.length + ' pasaje(s) de la Palabra · ' + mine.length + ' fragmento(s) tuyos para “' + raw + '”';
+  } else {
+    metaRow.textContent = REFLECTIONS.length + ' párrafos · ' + BIBLE.length + ' pasajes de la Palabra';
+  }
+}
+
+function cardHtml(e, terms){
+  const badges = e.axis.map(a => `<span class="badge ${a}">${axisLabel(a)}</span>`).join('');
+  const text = highlight(e.text, terms);
+  return `<div class="card">
+    <div class="card-head">
+      <span class="card-source">${escapeHtml(e.source)}</span>
+      <span class="badges">${badges}</span>
+    </div>
+    <div class="card-text">${text}</div>
+  </div>`;
+}
+
+qEl.addEventListener('input', render);
+qEl.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); render(); qEl.blur(); } });
+clearBtn.addEventListener('click', () => { qEl.value=''; render(); qEl.focus(); });
+goBtn.addEventListener('click', () => { render(); });
+
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    const axis = chip.dataset.axis;
+    if(activeAxes.has(axis)){ activeAxes.delete(axis); chip.dataset.active='false'; }
+    else { activeAxes.add(axis); chip.dataset.active='true'; }
+    render();
+  });
+});
+
+// ==================== CATEQUESIS ====================
+const cateOverlay = document.getElementById('cateOverlay');
+const cateDoc = document.getElementById('cateDoc');
+const cateBtn = document.getElementById('cateBtn');
+const cateClose = document.getElementById('cateClose');
+const catePrint = document.getElementById('catePrint');
+
+function axisWord(a){ return {kerigma:'el Kerigma', confianza:'la Confianza', vulnerabilidad:'la Debilidad hecha fuerza'}[a] || a; }
+
+function buildCatequesisHtml(raw){
+  const terms = raw ? raw.split(/\s+/).filter(Boolean) : [];
+  const kerigmas = pickKerigmas(terms, raw).slice(0,3);
+  const bibleFull = searchBible(terms, 5, raw);
+  const mineFull = (raw ? searchReflections(terms) : browseReflections()).slice(0,5);
+  const titleWord = raw || 'Kerigma, Confianza y Debilidad';
+
+  let h = '';
+  h += `<h2>Catequesis: ${escapeHtml(titleWord)}</h2>`;
+  h += `<p class="cate-sub">Página 1 de 2 · Kerigma, Palabra y vida</p>`;
+
+  h += `<h3>I. El anuncio que nunca cambia</h3>`;
+  h += `<p>Antes de mirar a "${escapeHtml(titleWord)}" a los ojos, hay una noticia que sostiene cualquier palabra que traigamos: Dios se ha hecho hombre en Cristo, y ese amor no depende de lo que encontremos aquí. Se dice de tres maneras distintas, para que quede grabado:</p>`;
+  kerigmas.forEach(k => { h += `<div class="cate-kerigma">${escapeHtml(k.text)}</div>`; });
+
+  h += `<h3>II. Lo que dice la Palabra</h3>`;
+  h += `<p>La Escritura no es un archivo de citas sueltas: es la voz que interpreta lo que vivimos. Estos son los pasajes que la Palabra ofrece en torno a "${escapeHtml(titleWord)}":</p>`;
+  bibleFull.forEach(b => {
+    h += `<p class="cate-verse">${escapeHtml(b.text)}<span class="cate-ref">${escapeHtml(b.ref)}</span></p>`;
+  });
+  h += `<p>Léelos despacio, dos veces si hace falta. La Palabra no explica el dolor del todo, pero lo acompaña: nos dice quién es Dios en medio de lo que buscamos, antes de decirnos qué hacer con ello.</p>`;
+
+  h += `<h3>III. Mi vida a la luz de esto</h3>`;
+  if(mineFull.length){
+    h += `<p>Esto no se queda en teoría: es lo que ya he ido reconociendo en mi propia historia y en las voces que me han acompañado, tocado por ${mineFull.map(e=>axisWord(e.axis[0])).filter((v,i,a)=>a.indexOf(v)===i).join(' y ')}:</p>`;
+    mineFull.forEach(e => {
+      h += `<p><em>${escapeHtml(e.source)}</em> — ${escapeHtml(e.text)}</p>`;
+    });
+  } else {
+    h += `<p>Todavía no tengo un párrafo tuyo tocando esta palabra en concreto — pero eso no vacía la catequesis: el Kerigma y la Palabra ya han hablado arriba, y con el tiempo, según sigas subiendo escritos, este apartado se irá llenando con tu propia voz.</p>`;
+  }
+
+  h += `<p class="cate-sub" style="margin-top:34px;">Página 2 de 2 · Para rezar y para quedarte con esto</p>`;
+  h += `<h3>IV. Para orar con esto</h3>`;
+  h += `<p>Señor, vengo hoy con esta palabra, "${escapeHtml(titleWord)}", tal como la siento, sin adornarla. Tú ya la conocías antes de que yo la escribiera. No te pido que la hagas desaparecer, sino que camines conmigo dentro de ella, como caminaste con los tuyos en Emaús sin que al principio lo reconocieran.</p>`;
+  h += `<p>Recuerdo que no bajaste de la cruz, que te clavaste con mi sufrimiento y no lejos de él. Recuerdo que mi confianza no se apoya en mis fuerzas, sino en la tuya, y que en mi debilidad es donde tu fuerza se hace más visible. Ayúdame a creerlo hoy, un poco más que ayer.</p>`;
+
+  h += `<h3>V. Una frase para llevar</h3>`;
+  const closing = kerigmas[0] || KERIGMA_CORE[0];
+  h += `<div class="cate-closing">"${escapeHtml(closing.text)}"</div>`;
+
+  return h;
+}
+
+function openCatequesis(){
+  const raw = qEl.value.trim();
+  cateDoc.innerHTML = buildCatequesisHtml(raw);
+  cateOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCatequesis(){
+  cateOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+cateBtn.addEventListener('click', openCatequesis);
+cateClose.addEventListener('click', closeCatequesis);
+catePrint.addEventListener('click', () => window.print());
+cateOverlay.addEventListener('click', (e) => { if(e.target === cateOverlay) closeCatequesis(); });
+document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeCatequesis(); });
+
+render();
+</script>
+</body>
+</html>
